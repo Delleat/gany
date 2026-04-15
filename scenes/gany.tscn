@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://b3jmjnlal3re4"]
+
+[ext_resource type="Script" uid="uid://c56iytkociccm" path="res://scripts/enemy.gd" id="1_42se6"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vhakj"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vhakj"]
+size = Vector3(0.335, 0.27, 0.72)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_42se6"]
+
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_42se6"]
+slide_on_slope = true
+
+[node name="Gany" type="CharacterBody3D" unique_id=438816084]
+script = ExtResource("1_42se6")
+metadata/_custom_type_script = "uid://c56iytkociccm"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=2034861869]
+mesh = SubResource("CapsuleMesh_vhakj")
+
+[node name="Mesz" type="MeshInstance3D" parent="Mesh" unique_id=1999283920]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.00040009618, 0.5552758, -0.36317194)
+mesh = SubResource("BoxMesh_vhakj")
+
+[node name="Collision" type="CollisionShape3D" parent="." unique_id=1684852287]
+shape = SubResource("CapsuleShape3D_42se6")
+
+[node name="NavAgent" type="NavigationAgent3D" parent="." unique_id=376484801]
+path_height_offset = -0.8
+path_max_distance = 25.01
+debug_enabled = true
+
+[node name="Eyes" type="RayCast3D" parent="." unique_id=741637974]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43260258, 0)
+target_position = Vector3(0, 0, -15)
+collision_mask = 3
+hit_from_inside = true
+debug_shape_custom_color = Color(0.6509804, 0.003921569, 1, 1)
+debug_shape_thickness = 3
+
+[node name="StairCheck" type="ShapeCast3D" parent="." unique_id=1979513423]
+transform = Transform3D(-1, -8.742278e-08, 3.821371e-15, 0, -4.371139e-08, -1, 8.742278e-08, -1, 4.371139e-08, 0, -1, -1)
+shape = SubResource("SeparationRayShape3D_42se6")
+collision_mask = 3

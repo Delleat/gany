@@ -1,0 +1,15 @@
+[gd_resource type="Theme" format=3 uid="uid://rxccg77x7mel"]
+
+[sub_resource type="SystemFont" id="SystemFont_1best"]
+font_names = PackedStringArray("JetBrainsMono Nerd Font")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1best"]
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+
+[resource]
+Label/constants/outline_size = 3
+Label/fonts/font = SubResource("SystemFont_1best")
+Panel/styles/panel = SubResource("StyleBoxFlat_1best")

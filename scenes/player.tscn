@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://hmg05712b413"]
+
+[ext_resource type="Script" uid="uid://b80kmh14qra0g" path="res://scripts/player.gd" id="1_3vyb7"]
+[ext_resource type="Shader" uid="uid://472vwpmd1gky" path="res://shaders/highlight.gdshader" id="2_dqkch"]
+[ext_resource type="PackedScene" uid="uid://c6rbe48b3hp0n" path="res://addons/interact/interact_ray.tscn" id="2_qhqgy"]
+[ext_resource type="Theme" uid="uid://rxccg77x7mel" path="res://other/ui_theme.tres" id="3_dqkch"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qlg0r"]
+render_priority = 0
+shader = ExtResource("2_dqkch")
+shader_parameter/shine_color = Color(1, 1, 1, 1)
+shader_parameter/shine_speed = 1.0
+shader_parameter/shine_width = 1.0
+shader_parameter/cycle_interval = 1.0
+shader_parameter/angle_fade = 1.0
+shader_parameter/x_direction = 0.0
+shader_parameter/y_direction = 0.0
+shader_parameter/z_direction = 1.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u8vuu"]
+
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_qhqgy"]
+slide_on_slope = true
+
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_dqkch"]
+
+[node name="Player" type="CharacterBody3D" unique_id=387199245]
+collision_mask = 2
+script = ExtResource("1_3vyb7")
+highlight_shader = SubResource("ShaderMaterial_qlg0r")
+
+[node name="Collision" type="CollisionShape3D" parent="." unique_id=626956233]
+shape = SubResource("CapsuleShape3D_u8vuu")
+
+[node name="ItemPivot" type="Node3D" parent="." unique_id=75110217]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+
+[node name="ItemPos" type="Node3D" parent="ItemPivot" unique_id=320240858]
+transform = Transform3D(4.371139e-08, -1, 1.509958e-07, -1, -4.371139e-08, -3.529303e-22, 6.6002366e-15, -1.509958e-07, -1, 0.6984162, -0.35518098, -0.64375335)
+
+[node name="Pivot" type="Node3D" parent="." unique_id=964653165]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+
+[node name="Camera" type="Camera3D" parent="Pivot" unique_id=258885141]
+
+[node name="InteractRay" parent="Pivot" unique_id=336290294 instance=ExtResource("2_qhqgy")]
+collision_mask = 8
+hit_from_inside = true
+debug_shape_custom_color = Color(0, 0, 1, 1)
+
+[node name="CeilingCheck" type="RayCast3D" parent="." unique_id=127428820]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+target_position = Vector3(0, 0.5, 0)
+collision_mask = 2
+hit_from_inside = true
+debug_shape_custom_color = Color(0.43137255, 0, 0.7019608, 1)
+
+[node name="HUD" type="Control" parent="." unique_id=102362839]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("3_dqkch")
+
+[node name="Debug" type="Label" parent="HUD" unique_id=1796141758]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.21729167
+anchor_bottom = 0.21864197
+offset_right = -0.3199997
+offset_bottom = 0.3199997
+metadata/_edit_use_anchors_ = true
+
+[node name="StairCheckF" type="CollisionShape3D" parent="." unique_id=2030868919]
+transform = Transform3D(-1, 8.742278e-08, -3.821371e-15, 0, -4.371139e-08, -1, -8.742278e-08, -1, 4.371139e-08, -4.5951467e-08, -0.2813552, -0.52562344)
+shape = SubResource("SeparationRayShape3D_qhqgy")
+
+[node name="StairCheckB" type="CollisionShape3D" parent="." unique_id=1286040777]
+transform = Transform3D(-1, 8.742278e-08, -3.821371e-15, 0, -4.371139e-08, -1, -8.742278e-08, -1, 4.371139e-08, 0, -0.281, 0.52)
+shape = SubResource("SeparationRayShape3D_qhqgy")
+
+[node name="StairCheckL" type="CollisionShape3D" parent="." unique_id=899483383]
+transform = Transform3D(-1, 8.742278e-08, -3.821371e-15, 0, -4.371139e-08, -1, -8.742278e-08, -1, 4.371139e-08, -0.52, -0.281, 0)
+shape = SubResource("SeparationRayShape3D_qhqgy")
+
+[node name="StairCheckR" type="CollisionShape3D" parent="." unique_id=969780291]
+transform = Transform3D(-1, 8.742278e-08, -3.821371e-15, 0, -4.371139e-08, -1, -8.742278e-08, -1, 4.371139e-08, 0.52, -0.281, 0)
+shape = SubResource("SeparationRayShape3D_dqkch")
