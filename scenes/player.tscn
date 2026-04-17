@@ -19,10 +19,8 @@ shader_parameter/z_direction = 1.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u8vuu"]
 
-[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_qhqgy"]
-slide_on_slope = true
-
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_dqkch"]
+length = 0.72
 
 [node name="Player" type="CharacterBody3D" unique_id=387199245]
 collision_mask = 2
@@ -76,15 +74,15 @@ metadata/_edit_use_anchors_ = true
 
 [node name="StairCheckF" type="CollisionShape3D" parent="." unique_id=2030868919]
 transform = Transform3D(-1, 8.742278e-08, -3.821371e-15, 0, -4.371139e-08, -1, -8.742278e-08, -1, 4.371139e-08, -4.5951467e-08, -0.2813552, -0.52562344)
-shape = SubResource("SeparationRayShape3D_qhqgy")
+shape = SubResource("SeparationRayShape3D_dqkch")
 
 [node name="StairCheckB" type="CollisionShape3D" parent="." unique_id=1286040777]
 transform = Transform3D(-1, 8.742278e-08, -3.821371e-15, 0, -4.371139e-08, -1, -8.742278e-08, -1, 4.371139e-08, 0, -0.281, 0.52)
-shape = SubResource("SeparationRayShape3D_qhqgy")
+shape = SubResource("SeparationRayShape3D_dqkch")
 
 [node name="StairCheckL" type="CollisionShape3D" parent="." unique_id=899483383]
 transform = Transform3D(-1, 8.742278e-08, -3.821371e-15, 0, -4.371139e-08, -1, -8.742278e-08, -1, 4.371139e-08, -0.52, -0.281, 0)
-shape = SubResource("SeparationRayShape3D_qhqgy")
+shape = SubResource("SeparationRayShape3D_dqkch")
 
 [node name="StairCheckR" type="CollisionShape3D" parent="." unique_id=969780291]
 transform = Transform3D(-1, 8.742278e-08, -3.821371e-15, 0, -4.371139e-08, -1, -8.742278e-08, -1, 4.371139e-08, 0.52, -0.281, 0)

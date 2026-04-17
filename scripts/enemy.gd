@@ -1,8 +1,8 @@
 class_name Enemy
 extends CharacterBody3D
 
-@export var walk_speed := 3.0
-@export var run_speed := 4.0
+@export var walk_speed := 2.5
+@export var run_speed := 3.5
 @export var view_angle := 160.0
 @export var idle_time := 3.0
 @export var rotation_speed := 10.0
@@ -28,12 +28,12 @@ func update(delta: float, player_pos: Vector3):
 	if what_sees and what_sees.global_position == player_pos and -global_basis.z.dot(dir) > v_a:
 		idle_time_left = 0.0
 		current_speed = run_speed
-		agent.set_target_position(what_sees.position)
+		go_to(what_sees.position)
 	
 	if idle_time_left > 0.0:
 		idle_time_left -= delta
 		if idle_time_left <= 0.0:
-			agent.set_target_position(hot_spots.pick_random())
+			go_to(hot_spots.pick_random())
 		return
 	
 	# Do not query when the map has never synchronized and is empty.
@@ -53,6 +53,9 @@ func update(delta: float, player_pos: Vector3):
 		var target_dir = (dest - global_position)
 		var target_angle = atan2(-target_dir.x, -target_dir.z)
 		rotation.y = lerp_angle(rotation.y, target_angle, delta * rotation_speed)
+
+func go_to(pos: Vector3):
+	agent.set_target_position(pos)
 
 func _on_velocity_computed(safe_velocity: Vector3):
 	velocity = safe_velocity

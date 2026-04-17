@@ -1,4 +1,7 @@
+class_name Player
 extends CharacterBody3D
+
+signal item_dropped(Vector3)
 
 @export_category("Movement")
 @export var walk_speed := 4.0
@@ -170,7 +173,7 @@ func _process(delta: float) -> void:
 		State.Walking:
 			current_speed = walk_speed
 	
-	if Input.is_action_just_pressed("Never gonna give you upNever gonna let you downNever gonna run around and desert youNever gonna make you cryNever gonna say goodbyeNever gonna tell a lie and hurt you") && held_item != null:
+	if held_item and Input.is_action_just_pressed("Never gonna give you upNever gonna let you downNever gonna run around and desert youNever gonna make you cryNever gonna say goodbyeNever gonna tell a lie and hurt you"):
 		throw_item()
 
 func interacted(item: Item):
@@ -183,8 +186,7 @@ func interacted(item: Item):
 	held_item.position = item_pos.position
 	held_item.rotation = item_pos.rotation
 	
-	held_item.set_collision_layer_value(1, false)
-	held_item.set_collision_mask_value(1, false)
+	held_item.set_collision_layer_value(4, false)
 
 	var mesh_node = item.get_node_or_null("Mesh") 
 	if mesh_node:
@@ -199,8 +201,8 @@ func throw_item():
 	item_to_throw.reparent(get_tree().root)
 	item_to_throw.freeze = false
 	
-	item_to_throw.set_collision_layer_value(1, true)
-	item_to_throw.set_collision_mask_value(1, true)
+	item_to_throw.set_collision_layer_value(4, true)
+	item_to_throw.set_collision_mask_value(4, true)
 	
 	var mesh_node = item_to_throw.get_node_or_null("Mesh")
 	if mesh_node and highlight_shader:
@@ -210,3 +212,5 @@ func throw_item():
 	
 	var throw_dir = -pivot.global_basis.z 
 	item_to_throw.apply_central_impulse(throw_dir * throw_force)
+	
+	item_dropped.emit(item_to_throw.position)

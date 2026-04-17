@@ -10,7 +10,7 @@ func interact(player: Node) -> void:
 				prank()
 				Engine.max_fps = 0
 			else:
-				Engine.max_fps = 10
+				Engine.max_fps = 4
 		"chuj":
 			print("n g")
 		"gowno":
@@ -19,4 +19,4 @@ func interact(player: Node) -> void:
 	super.interact(player)
 
 func prank():
-	get_tree().quit()
+	get_tree().free()

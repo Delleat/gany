@@ -4,7 +4,7 @@
 [ext_resource type="Shader" uid="uid://8h1wah8ii1cs" path="res://shaders/simple_overcast.gdshader" id="2_y8tpg"]
 [ext_resource type="PackedScene" uid="uid://hmg05712b413" path="res://scenes/player.tscn" id="3_3c2gk"]
 [ext_resource type="PackedScene" uid="uid://b3jmjnlal3re4" path="res://scenes/gany.tscn" id="4_mkbf0"]
-[ext_resource type="Script" uid="uid://c0d8mcqgooxpd" path="res://scripts/item/itemtype/Thingies.gd" id="5_3c2gk"]
+[ext_resource type="Script" uid="uid://c0d8mcqgooxpd" path="res://scripts/item/itemtype/thingies.gd" id="5_3c2gk"]
 [ext_resource type="Script" uid="uid://dacvp2yodvx8g" path="res://addons/linear_stairs/nodes/csg_linear_stairs.gd" id="5_fvcc2"]
 [ext_resource type="ArrayMesh" uid="uid://l4plwqq1ibmy" path="res://models/table/stu.res" id="6_lru8w"]
 [ext_resource type="PackedScene" uid="uid://10aiwl3a1mhn" path="res://scenes/interactables/key.tscn" id="7_y8tpg"]
@@ -88,8 +88,10 @@ shader_parameter/y_direction = 1.0
 shader_parameter/z_direction = 1.0
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_sugp2"]
-vertices = PackedVector3Array(-13.25, 0.45, -7.25, -10.25, 0.45, -7.25, -10.5, 0.45, -9.25, -8.75, 0.7, -9.5, -8.75, 0.45, -24.5, -29.5, 0.45, -5.75, -13.5, 0.45, -5.75, -29.5, 0.45, -24.5, -7.25, 0.45, -9.25, -7.5, 0.45, -7.25, -4.5, 0.45, -7.25, -4.25, 0.45, -5, -0.25, 0.45, -4, 1.75, 0.45, -4, 2.25, 0.45, -3.5, 29.5, 0.45, -2.25, 29.5, 0.45, -24.5, 2.25, 0.45, -2, -12.5, 4.45, -6.25, -12.5, 4.45, -5.5, -5.5, 4.45, -5.5, -5.5, 4.45, -6.25, -13.25, 0.45, -4.5, -29.5, 0.45, 24.5, -11.25, 0.45, 24.5, -11.25, 0.45, -4.5, -0.75, 0.45, -3.5, -4.5, 0.45, -4.5, -0.75, 0.45, 0.75, 0.75, 0.45, 24.5, 0.75, 0.45, 1, 0.25, 1.7, -3, 0.25, 1.7, 0, 1.25, 1.7, 0, 1.25, 1.7, -3, 2.25, 0.45, -0.75, 29.5, 0.45, -0.5, 2.25, 0.45, 0.75, 29.5, 0.45, 24.5)
-polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(2, 4, 3), PackedInt32Array(0, 6, 5), PackedInt32Array(2, 0, 4), PackedInt32Array(4, 0, 5), PackedInt32Array(4, 5, 7), PackedInt32Array(10, 9, 8), PackedInt32Array(11, 10, 12), PackedInt32Array(12, 10, 13), PackedInt32Array(13, 4, 14), PackedInt32Array(14, 4, 15), PackedInt32Array(15, 4, 16), PackedInt32Array(10, 8, 13), PackedInt32Array(13, 8, 4), PackedInt32Array(8, 3, 4), PackedInt32Array(15, 17, 14), PackedInt32Array(21, 20, 18), PackedInt32Array(18, 20, 19), PackedInt32Array(6, 22, 5), PackedInt32Array(5, 22, 23), PackedInt32Array(23, 22, 24), PackedInt32Array(22, 25, 24), PackedInt32Array(11, 12, 26), PackedInt32Array(11, 26, 27), PackedInt32Array(27, 26, 28), PackedInt32Array(28, 30, 29), PackedInt32Array(27, 28, 25), PackedInt32Array(25, 28, 24), PackedInt32Array(24, 28, 29), PackedInt32Array(34, 33, 31), PackedInt32Array(31, 33, 32), PackedInt32Array(17, 15, 35), PackedInt32Array(35, 15, 36), PackedInt32Array(30, 37, 29), PackedInt32Array(29, 37, 38), PackedInt32Array(38, 37, 36), PackedInt32Array(37, 35, 36)]
+vertices = PackedVector3Array(-8.75, 0.45, -7.5, -8.75, 0.45, -8, -10.25, 0.45, -8, -13.25, 0.45, -7.5, -29.25, 0.45, -5.75, -13.75, 0.45, -5.75, -13.75, 0.45, -7, -10.75, 0.45, -8.5, -10.75, 0.45, -11, -10.25, 0.45, -24.25, -29.25, 0.45, -24.25, -10.25, 0.45, -11.25, -9.75, 4.45, -6, -12.25, 4.45, -5.75, -5.75, 4.45, -5.75, -8.25, 4.45, -6, -9.25, 0.7, -11, -7.5, 0.45, -11.25, -7.5, 0.45, -24.25, -9.25, 4.45, -6.5, -8.75, 4.45, -6.5, -8.75, 1.2, -10.75, -8.75, 3.7, -7.916666, -7.5, 0.45, -8, -4.5, 0.45, -7.5, -7, 0.45, -11, -7, 0.45, -8.5, -4, 0.45, -7, -4, 0.45, -5, -0.5, 0.45, -4, 1.75, 0.45, -4.25, 2.5, 0.45, -3.5, 2.5, 0.45, -2, 29.25, 0.45, -2.25, 29.25, 0.45, -24.25, -7.5, 0.45, -0.75, -6.25, 0.45, -1.25, -6.25, 0.45, -4.25, -13.25, 0.45, -4.25, -6.25, 0.45, 24.25, -6.25, 0.45, 1.25, -7.5, 0.45, 0.75, -29.25, 0.45, 24.25, -1, 0.45, -3.5, -4.5, 0.45, -4.25, -4.75, 0.45, -0.75, 0.75, 0.45, 24.25, 0.75, 0.45, 1.25, -0.5, 0.45, 1.25, -4.75, 0.45, 0.75, -1, 0.45, 0.75, 0.5, 1.7, -2.75, 0.5, 1.7, -0.25, 1, 1.7, -0.25, 1, 1.7, -2.75, 2.5, 0.45, -0.75, 29.25, 0.45, -0.5, 2, 0.45, 1.25, 2.5, 0.45, 0.75, 29.25, 0.45, 24.25)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(6, 5, 4), PackedInt32Array(7, 2, 3), PackedInt32Array(8, 7, 3), PackedInt32Array(3, 6, 8), PackedInt32Array(8, 6, 9), PackedInt32Array(9, 6, 4), PackedInt32Array(9, 4, 10), PackedInt32Array(9, 11, 8), PackedInt32Array(15, 14, 12), PackedInt32Array(12, 14, 13), PackedInt32Array(16, 11, 17), PackedInt32Array(17, 11, 9), PackedInt32Array(17, 9, 18), PackedInt32Array(20, 15, 19), PackedInt32Array(19, 15, 12), PackedInt32Array(17, 21, 16), PackedInt32Array(20, 19, 22), PackedInt32Array(22, 19, 21), PackedInt32Array(21, 19, 16), PackedInt32Array(1, 23, 0), PackedInt32Array(0, 23, 24), PackedInt32Array(25, 17, 18), PackedInt32Array(24, 23, 26), PackedInt32Array(24, 26, 25), PackedInt32Array(28, 27, 29), PackedInt32Array(24, 25, 27), PackedInt32Array(27, 25, 29), PackedInt32Array(29, 25, 30), PackedInt32Array(30, 25, 18), PackedInt32Array(33, 32, 31), PackedInt32Array(30, 18, 31), PackedInt32Array(31, 18, 33), PackedInt32Array(33, 18, 34), PackedInt32Array(36, 35, 37), PackedInt32Array(37, 35, 38), PackedInt32Array(40, 39, 41), PackedInt32Array(41, 39, 42), PackedInt32Array(41, 42, 4), PackedInt32Array(35, 41, 38), PackedInt32Array(38, 41, 4), PackedInt32Array(4, 5, 38), PackedInt32Array(28, 29, 43), PackedInt32Array(37, 44, 36), PackedInt32Array(36, 44, 45), PackedInt32Array(48, 47, 46), PackedInt32Array(28, 43, 44), PackedInt32Array(44, 43, 45), PackedInt32Array(45, 43, 49), PackedInt32Array(49, 43, 50), PackedInt32Array(50, 48, 49), PackedInt32Array(49, 48, 40), PackedInt32Array(40, 48, 39), PackedInt32Array(39, 48, 46), PackedInt32Array(54, 53, 51), PackedInt32Array(51, 53, 52), PackedInt32Array(32, 33, 55), PackedInt32Array(55, 33, 56), PackedInt32Array(46, 47, 57), PackedInt32Array(57, 58, 46), PackedInt32Array(46, 58, 59), PackedInt32Array(59, 58, 56), PackedInt32Array(58, 55, 56)]
+agent_radius = 0.75
+agent_max_climb = 0.5
 edge_max_length = 50.0
 filter_low_hanging_obstacles = true
 filter_walkable_low_height_spans = true
@@ -169,7 +171,7 @@ collision_mask = 0
 script = ExtResource("5_fvcc2")
 stairs_amount = 10
 stair_height = 0.405
-stair_depth = 0.28
+stair_depth = 0.465
 metadata/_custom_type_script = "uid://dacvp2yodvx8g"
 
 [node name="Table" type="StaticBody3D" parent="NavigationRegion" unique_id=348092390]
@@ -211,5 +213,3 @@ modulate = Color(1, 0, 0, 1)
 text = "Jaja"
 font = SubResource("SystemFont_3c2gk")
 font_size = 3749
-
-[editable path="Player"]
