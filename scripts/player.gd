@@ -1,7 +1,7 @@
 class_name Player
 extends CharacterBody3D
 
-signal item_dropped(Vector3)
+signal item_dropped(Item)
 
 @export_category("Movement")
 @export var walk_speed := 4.0
@@ -46,7 +46,7 @@ var is_moving := false
 var player_state := State.Walking
 
 var current_item
-var held_item: Item = null
+var held_item: Item
 
 enum State {
 	Walking,
@@ -187,16 +187,16 @@ func interacted(item: Item):
 	held_item.rotation = item_pos.rotation
 	
 	held_item.set_collision_layer_value(4, false)
-
-	var mesh_node = item.get_node_or_null("Mesh") 
-	if mesh_node:
-		var mat = mesh_node.get_active_material(0)
-		if mat:
-			mat.next_pass = null
+	
+	var mesh_node := item.get_node("Mesh") 
+	var mat = mesh_node.get_active_material(0)
+	mat.next_pass = null
 
 func throw_item():
-	var item_to_throw = held_item
+	var item_to_throw := held_item
 	held_item = null
+	
+	item_dropped.emit(item_to_throw)
 	
 	item_to_throw.reparent(get_tree().root)
 	item_to_throw.freeze = false
@@ -204,13 +204,9 @@ func throw_item():
 	item_to_throw.set_collision_layer_value(4, true)
 	item_to_throw.set_collision_mask_value(4, true)
 	
-	var mesh_node = item_to_throw.get_node_or_null("Mesh")
-	if mesh_node and highlight_shader:
-		var mat = mesh_node.get_active_material(0)
-		if mat:
-			mat.next_pass = highlight_shader
+	var mesh_node = item_to_throw.get_node("Mesh")
+	var mat = mesh_node.get_active_material(0)
+	mat.next_pass = highlight_shader
 	
 	var throw_dir = -pivot.global_basis.z 
 	item_to_throw.apply_central_impulse(throw_dir * throw_force)
-	
-	item_dropped.emit(item_to_throw.position)

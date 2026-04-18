@@ -30,7 +30,7 @@ func update(delta: float, player_pos: Vector3):
 		current_speed = run_speed
 		go_to(what_sees.position)
 	
-	if idle_time_left > 0.0:
+	if idle_time_left > 0.0 and agent.is_navigation_finished():
 		idle_time_left -= delta
 		if idle_time_left <= 0.0:
 			go_to(hot_spots.pick_random())

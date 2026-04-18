@@ -2,7 +2,6 @@
 class_name Item
 extends Interactable
 
-@export_group("Item Info")
 @export var item_name := "Object"
 @export var item_id := "generic_item"
 

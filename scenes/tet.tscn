@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://dacvp2yodvx8g" path="res://addons/linear_stairs/nodes/csg_linear_stairs.gd" id="5_fvcc2"]
 [ext_resource type="ArrayMesh" uid="uid://l4plwqq1ibmy" path="res://models/table/stu.res" id="6_lru8w"]
 [ext_resource type="PackedScene" uid="uid://10aiwl3a1mhn" path="res://scenes/interactables/key.tscn" id="7_y8tpg"]
+[ext_resource type="Shader" uid="uid://docb0idv6m68j" path="res://shaders/lgbt.gdshader" id="9_mkbf0"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_tefeu"]
 noise_type = 5
@@ -107,6 +108,22 @@ data = PackedVector3Array(-0.0001, -2.6633, -0.7061, 0.4992, 2.6632, -0.4996, -0
 font_names = PackedStringArray("DejaVu Serif")
 font_italic = true
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fvcc2"]
+render_priority = 0
+shader = ExtResource("9_mkbf0")
+shader_parameter/flag_type = 1
+shader_parameter/wind_strength = 2.5
+shader_parameter/wind_speed = 1.5
+shader_parameter/wind_angle = 0.2
+shader_parameter/wind_phase = 0.0
+shader_parameter/pin = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lru8w"]
+material = SubResource("ShaderMaterial_fvcc2")
+size = Vector2(3, 2)
+subdivide_width = 64
+subdivide_depth = 64
+
 [node name="Tet" type="Node3D" unique_id=1706738196 node_paths=PackedStringArray("player")]
 script = ExtResource("1_c0t4b")
 player = NodePath("Player")
@@ -196,15 +213,9 @@ size = Vector3(8, 4, 1.5)
 
 [node name="Key" parent="Items" unique_id=1121015409 instance=ExtResource("7_y8tpg")]
 transform = Transform3D(-1.3113415e-08, -5.7320557e-16, -0.29999998, -1.3113418e-08, -0.29999998, 1.1464113e-15, -0.29999998, 1.3113418e-08, 1.3113415e-08, 0.48270297, 1.7190675, -1.2167063)
-item_name = "Zjebany Key"
+item_name = "Key do dupy"
 item_id = "chuj"
 prompt_message = "Pick Up"
-
-[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=957600798]
-transform = Transform3D(1, 0, 0, 0, 0.99990666, 0.013665504, 0, -0.013665504, 0.99990666, 0, 8.487178, -15.965147)
-light_energy = 2.69
-omni_range = 50.0
-omni_shadow_mode = 0
 
 [node name="TEXT" type="Label3D" parent="." unique_id=1037629968]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.753976, -51.286472)
@@ -213,3 +224,21 @@ modulate = Color(1, 0, 0, 1)
 text = "Jaja"
 font = SubResource("SystemFont_3c2gk")
 font_size = 3749
+
+[node name="Flag" type="MeshInstance3D" parent="." unique_id=1738997792]
+transform = Transform3D(12.881597, 0, 0, 0, -4.3711374e-08, 9.617723, 0, -0.99999964, -4.2040404e-07, 0, 11.947318, 24.212751)
+mesh = SubResource("PlaneMesh_lru8w")
+
+[node name="Lightninght" type="Node3D" parent="." unique_id=1162938684]
+
+[node name="OmniLight" type="OmniLight3D" parent="Lightninght" unique_id=957600798]
+transform = Transform3D(1, 0, 0, 0, 0.99990666, 0.013665504, 0, -0.013665504, 0.99990666, 0, 8.487178, -15.965147)
+light_energy = 2.69
+omni_range = 50.0
+omni_shadow_mode = 0
+
+[node name="OmniLight2" type="OmniLight3D" parent="Lightninght" unique_id=607708528]
+transform = Transform3D(1, 0, 0, 0, 0.99990666, 0.013665504, 0, -0.013665504, 0.99990666, 0, 8.487178, 14.4256935)
+light_energy = 2.69
+omni_range = 50.0
+omni_shadow_mode = 0
