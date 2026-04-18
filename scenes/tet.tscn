@@ -44,7 +44,7 @@ sky = SubResource("Sky_y8tpg")
 ambient_light_source = 3
 reflected_light_source = 2
 
-[sub_resource type="Shader" id="Shader_y8tpg"]
+[sub_resource type="Shader" id="Shader_mkbf0"]
 code = "shader_type spatial;
 render_mode unshaded, depth_draw_never;
 
@@ -78,7 +78,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3c2gk"]
 render_priority = 0
-shader = SubResource("Shader_y8tpg")
+shader = SubResource("Shader_mkbf0")
 shader_parameter/shine_color = Color(1, 1, 1, 0.18431373)
 shader_parameter/shine_speed = 7.0000003325
 shader_parameter/shine_width = 1.0
@@ -132,10 +132,11 @@ player = NodePath("Player")
 environment = SubResource("Environment_choun")
 
 [node name="Player" parent="." unique_id=387199245 instance=ExtResource("3_3c2gk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0655991, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0223389, 1.0000001, 1.5112422)
 max_stamina = 1000.0
 throw_force = 13.0
 highlight_shader = SubResource("ShaderMaterial_3c2gk")
+camera_smoothing = false
 
 [node name="Enemies" type="Node3D" parent="." unique_id=1047872253]
 
@@ -232,13 +233,12 @@ mesh = SubResource("PlaneMesh_lru8w")
 [node name="Lightninght" type="Node3D" parent="." unique_id=1162938684]
 
 [node name="OmniLight" type="OmniLight3D" parent="Lightninght" unique_id=957600798]
-transform = Transform3D(1, 0, 0, 0, 0.99990666, 0.013665504, 0, -0.013665504, 0.99990666, 0, 8.487178, -15.965147)
-light_energy = 2.69
-omni_range = 50.0
-omni_shadow_mode = 0
+transform = Transform3D(1, 0, 0, 0, 0.99990666, 0.013665504, 0, -0.013665504, 0.99990666, 0, 8.487178, -9.712488)
+layers = 3
+omni_range = 25.0
 
-[node name="OmniLight2" type="OmniLight3D" parent="Lightninght" unique_id=607708528]
-transform = Transform3D(1, 0, 0, 0, 0.99990666, 0.013665504, 0, -0.013665504, 0.99990666, 0, 8.487178, 14.4256935)
-light_energy = 2.69
-omni_range = 50.0
-omni_shadow_mode = 0
+[node name="SpotLight3D" type="SpotLight3D" parent="Lightninght" unique_id=1388961596]
+transform = Transform3D(1, 0, 0, 0, -0.95413065, 0.2993906, 0, -0.2993906, -0.95413065, 0.10810661, 17.393766, 7.0895367)
+spot_range = 26.949453
+spot_attenuation = 0.26
+spot_angle = 61.513813

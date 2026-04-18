@@ -25,13 +25,15 @@ signal item_dropped(Item)
 @export var can_jump := false
 @export var camera_smoothing := true
 
-@onready var pivot = $Pivot
-@onready var cam = $Pivot/Camera
-@onready var coll = $Collision
-@onready var debug = $HUD/Debug
-@onready var ceiling_ray_check = $CeilingCheck
-@onready var item_pivot = $ItemPivot
-@onready var item_pos = $ItemPivot/ItemPos
+@onready var pivot := $CameraPivot
+@onready var cam := $CameraPivot/Camera
+@onready var coll := $Collision
+@onready var debug := $HUD/Debug
+@onready var ceiling_ray_check := $CeilingCheck
+@onready var item_pivot := $ItemPivot
+@onready var item_pos := $ItemPivot/ItemPos
+@onready var item_camera := $CameraPivot/Camera/SubViewportContainer/SubViewport/ItemCamera
+@onready var fleshlight := $ItemPivot/Fleshlight/SpotLight3D
 
 var t_bob := 0.0
 var target_rotation_x := 0.0
@@ -66,7 +68,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y = jump_velocity
 	
 	var input_dir := Input.get_vector("jaja w lewo", "jaja w prawo", "jaja w pszud", "jaja w du")
-	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var direction = (pivot.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
 		is_moving = true
 		velocity.x = lerp(velocity.x, direction.x * current_speed, delta * 15.0)
@@ -107,23 +109,17 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()
-
-func _unhandled_input(event):
-	if event is InputEventMouseMotion:
-		target_rotation_x -= event.relative.y * mouse_sensitivity
-		target_rotation_y -= event.relative.x * mouse_sensitivity
-		
-		target_rotation_x = clamp(target_rotation_x, deg_to_rad(-80), deg_to_rad(80))
-
-func _process(delta: float) -> void:
+	
+	# Everything below was earlier in _proccess()
+	
 	debug.text = str(Engine.get_frames_per_second()) + " FPS\n " + str(player_state)
 	
 	# przepotezne kamera system smufing
 	if camera_smoothing:
-		rotation.y = lerp_angle(rotation.y, target_rotation_y, delta * smoothing_amount)
+		pivot.rotation.y = lerp_angle(pivot.rotation.y, target_rotation_y, delta * smoothing_amount)
 		pivot.rotation.x = lerp(pivot.rotation.x, target_rotation_x, delta * smoothing_amount)
 	else:
-		rotation.y = target_rotation_y
+		pivot.rotation.y = target_rotation_y
 		pivot.rotation.x = target_rotation_x
 	
 	# potezny crouching updatededed
@@ -139,12 +135,12 @@ func _process(delta: float) -> void:
 	
 	var target_y = -0.4 if is_crouching else 0.7
 	
-	item_pivot.position.y = 0.2 if is_crouching else 0.7
+	item_pivot.position.y = 0.15 if is_crouching else 0.7
 	coll.position.y = -0.493 if is_crouching else 0.0
 	coll.shape.height = 1.014 if is_crouching else 2.0
 	pivot.position.y = lerp(pivot.position.y, target_y, delta * 10.0)
 	
-	if Input.is_action_pressed("jaja w barco pszut") and can_sprint and not is_crouching and is_moving and current_stamina > 0.0 and velocity.length() > 0.1:
+	if Input.is_action_pressed("jaja w barco pszut") and can_sprint and not is_crouching and is_moving and current_stamina > 0.0 and velocity.length() > 0.1 and input_dir.y <= 0:
 		is_sprinting = true
 		current_stamina -= 0.8 * delta * 60
 	else:
@@ -173,8 +169,21 @@ func _process(delta: float) -> void:
 		State.Walking:
 			current_speed = walk_speed
 	
+	item_camera.global_position = pivot.global_position
+	item_camera.global_rotation = pivot.global_rotation
+	
+	if Input.is_action_just_pressed("fleshlight"):
+		fleshlight.visible = !fleshlight.visible
+	
 	if held_item and Input.is_action_just_pressed("Never gonna give you upNever gonna let you downNever gonna run around and desert youNever gonna make you cryNever gonna say goodbyeNever gonna tell a lie and hurt you"):
 		throw_item()
+
+func _unhandled_input(event):
+	if event is InputEventMouseMotion:
+		target_rotation_x -= event.relative.y * mouse_sensitivity
+		target_rotation_y -= event.relative.x * mouse_sensitivity
+		
+		target_rotation_x = clamp(target_rotation_x, deg_to_rad(-80), deg_to_rad(80))
 
 func interacted(item: Item):
 	if held_item: return
@@ -188,7 +197,10 @@ func interacted(item: Item):
 	
 	held_item.set_collision_layer_value(4, false)
 	
-	var mesh_node := item.get_node("Mesh") 
+	var mesh_node: MeshInstance3D = item.get_node("Mesh")
+	mesh_node.set_layer_mask_value(1, false)
+	mesh_node.set_layer_mask_value(2, true)
+	
 	var mat = mesh_node.get_active_material(0)
 	mat.next_pass = null
 
@@ -205,6 +217,9 @@ func throw_item():
 	item_to_throw.set_collision_mask_value(4, true)
 	
 	var mesh_node = item_to_throw.get_node("Mesh")
+	mesh_node.set_layer_mask_value(1, true)
+	mesh_node.set_layer_mask_value(2, false)
+	
 	var mat = mesh_node.get_active_material(0)
 	mat.next_pass = highlight_shader
 	
