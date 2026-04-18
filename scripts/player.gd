@@ -138,7 +138,6 @@ func _physics_process(delta: float) -> void:
 	var item_target_y = -0.3 if is_crouching else 0.7
 	item_pivot.position.y = lerp(item_pivot.position.y, item_target_y, delta * 10.0)
 	
-	item_pivot.position.y = 0.15 if is_crouching else 0.7
 	coll.position.y = -0.493 if is_crouching else 0.0
 	coll.shape.height = 1.014 if is_crouching else 2.0
 	pivot.position.y = lerp(pivot.position.y, target_y, delta * 10.0)

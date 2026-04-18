@@ -47,9 +47,11 @@ transform = Transform3D(-6.244484e-07, -1.2488968e-06, -14.285714, -2.7295505e-1
 light_color = Color(0.8666667, 0.92156863, 0.92156863, 1)
 light_energy = 2.0
 light_indirect_energy = 1.2
-spot_range = 15.0
-spot_attenuation = 1.2
-spot_angle = 50.0
+light_volumetric_fog_energy = 12.356
+shadow_enabled = true
+spot_range = 25.0
+spot_attenuation = 2.0
+spot_angle = 25.0
 spot_angle_attenuation = 2.0
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=964653165]

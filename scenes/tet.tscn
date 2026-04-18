@@ -43,6 +43,7 @@ background_mode = 2
 sky = SubResource("Sky_y8tpg")
 ambient_light_source = 3
 reflected_light_source = 2
+volumetric_fog_enabled = true
 
 [sub_resource type="Shader" id="Shader_mkbf0"]
 code = "shader_type spatial;
@@ -137,6 +138,12 @@ max_stamina = 1000.0
 throw_force = 13.0
 highlight_shader = SubResource("ShaderMaterial_3c2gk")
 camera_smoothing = false
+
+[node name="SpotLight3D" parent="Player/ItemPivot/Fleshlight" parent_id_path=PackedInt32Array(387199245, 1241299602) index="0" unique_id=1933323465]
+transform = Transform3D(-6.244484e-07, -1.248897e-06, -14.285715, -2.7295503e-14, 14.285716, -1.2488969e-06, 14.285714, -2.7295513e-14, -6.2444843e-07, 5.456585, 1.9073486e-06, 0)
+shadow_enabled = false
+spot_angle = 24.3
+spot_angle_attenuation = 3.138357
 
 [node name="Enemies" type="Node3D" parent="." unique_id=1047872253]
 
@@ -242,3 +249,5 @@ transform = Transform3D(1, 0, 0, 0, -0.95413065, 0.2993906, 0, -0.2993906, -0.95
 spot_range = 26.949453
 spot_attenuation = 0.26
 spot_angle = 61.513813
+
+[editable path="Player"]
