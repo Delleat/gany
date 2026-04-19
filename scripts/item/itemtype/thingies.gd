@@ -2,6 +2,7 @@ extends Interactable
 class_name Thingies
 
 @export var object_id := "test"
+var is_locked := true
 var info_tween: Tween
 var interact_info
 func interact(player: Node) -> void:
@@ -13,17 +14,12 @@ func interact(player: Node) -> void:
 			else:
 				Engine.max_fps = 17
 		"door":
-			if player.held_item == null and object_id != "chuj":
-				show_temp_info("Your hand seems to not contain a Key")
+			if player.held_item == null and is_locked:
+				show_temp_info("Your hand seems to be missing an important piece (Key)")
 				return
-			sleeping = false
-			var power = 35
-			var push_dir = (global_position - player.global_position).normalized()
-			var handle_offset = global_basis.x * 0.5
-			
-			push_dir.y = 0
-			
-			apply_impulse(push_dir * power, handle_offset)
+			elif is_locked:
+				is_locked = false # Odblokowujemy drzwi na stałe
+				show_temp_info("The door is now unlocked.")
 	
 	super.interact(player)
 

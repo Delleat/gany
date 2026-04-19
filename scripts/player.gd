@@ -23,6 +23,7 @@ signal item_dropped(Item)
 @export_group("Misc")
 @export var throw_force := 10.0
 @export var highlight_shader: ShaderMaterial
+@export var door_pull_force := 1.5
 
 @onready var pivot := $CameraPivot
 @onready var cam := $CameraPivot/Camera
@@ -48,14 +49,21 @@ var held_item: Item
 var is_crouch_toggled := false
 var is_sprint_toggled := false
 
+var grabbed_door: RigidBody3D = null
+var mouse_input_y: float = 0.0
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	current_stamina = max_stamina
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
-		target_rotation_x = clamp(target_rotation_x - event.relative.y * mouse_sensitivity, -1.4, 1.4)
-		target_rotation_y -= event.relative.x * mouse_sensitivity
+		if grabbed_door:
+			mouse_input_y = event.relative.y
+			target_rotation_y -= event.relative.x * (mouse_sensitivity * 0.5)
+		else:
+			target_rotation_x = clamp(target_rotation_x - event.relative.y * mouse_sensitivity, -1.4, 1.4)
+			target_rotation_y -= event.relative.x * mouse_sensitivity
 
 func _process(delta: float):
 	pivot.rotation.x = lerp_angle(pivot.rotation.x, target_rotation_x, delta * smoothing_amount)
@@ -73,6 +81,7 @@ func _physics_process(delta: float):
 	handle_gravity(delta)
 	handle_controls(delta)
 	handle_movement(delta)
+	handle_door_physics()
 	
 	if Input.is_action_just_pressed("fleshlight"):
 		fleshlight.visible = !fleshlight.visible
@@ -158,6 +167,32 @@ func handle_head_bob(delta):
 		cam.transform.origin.x = cos(t_bob * bob_freq * 0.5) * bob_amp
 	else:
 		cam.transform.origin = cam.transform.origin.lerp(Vector3.ZERO, delta * 10.0)
+
+func handle_door_physics():
+	if Input.is_action_just_pressed("grab"):
+		var ray = $CameraPivot/InteractRay
+		if ray.is_colliding():
+			var collider = ray.get_collider()
+			if collider is Thingies and collider.object_id == "door":
+				if collider.is_locked:
+					return 
+				
+				grabbed_door = collider
+
+	if Input.is_action_just_released("grab"):
+		grabbed_door = null
+
+	if grabbed_door:
+		var push_dir = -pivot.global_basis.z
+		push_dir.y = 0
+		push_dir = push_dir.normalized()
+
+		if abs(mouse_input_y) > 0.01:
+			grabbed_door.sleeping = false
+			var force_vector = push_dir * (-mouse_input_y * door_pull_force)
+			var handle_offset = grabbed_door.global_basis.x * 0.5
+			grabbed_door.apply_impulse(force_vector, handle_offset)
+			mouse_input_y = 0.0
 
 func interacted(item: Item):
 	if held_item: return
