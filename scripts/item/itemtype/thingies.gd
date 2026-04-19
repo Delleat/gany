@@ -17,7 +17,7 @@ func interact(player: Node) -> void:
 				show_temp_info("Your hand seems to not contain a Key")
 				return
 			sleeping = false
-			var power = 20.0 
+			var power = 35
 			var push_dir = (global_position - player.global_position).normalized()
 			var handle_offset = global_basis.x * 0.5
 			

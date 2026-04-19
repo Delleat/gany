@@ -7,7 +7,6 @@ extends CharacterBody3D
 @export var idle_time := 3.0
 @export var rotation_speed := 10.0
 
-@onready var door_check := $DoorCheck
 @onready var agent := $NavAgent
 @onready var sight := $Eyes
 @onready var v_a := cos(deg_to_rad(view_angle / 2.0))
@@ -37,8 +36,6 @@ func update(delta: float, player_pos: Vector3):
 			go_to(hot_spots.pick_random())
 		return
 	
-	check_for_doors()
-	
 	if NavigationServer3D.map_get_iteration_id(agent.get_navigation_map()) == 0:
 		return
 	if agent.is_navigation_finished():
@@ -66,16 +63,3 @@ func _on_velocity_computed(safe_velocity: Vector3):
 func _on_navigation_finished() -> void:
 	current_speed = walk_speed
 	idle_time_left = idle_time
-
-func check_for_doors():
-	if door_check.is_colliding():
-		var collider = door_check.get_collider()
-		if collider is Thingies or collider.get_parent() is Thingies:
-			var door = collider if collider is Thingies else collider.get_parent()
-			
-			if door.object_id == "door":
-				kick_the_fuck_out_of_the_door(door)
-
-func kick_the_fuck_out_of_the_door(door):
-	var push_dir = -door.global_basis.z * 70
-	door.apply_central_impulse(push_dir)

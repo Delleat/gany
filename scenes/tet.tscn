@@ -66,6 +66,8 @@ edge_max_length = 50.0
 detail_sample_max_error = 0.1
 filter_walkable_low_height_spans = true
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lru8w"]
+
 [sub_resource type="SphereMesh" id="SphereMesh_3c2gk"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_mkbf0"]
@@ -144,8 +146,11 @@ collision_layer = 16
 collision_mask = 24
 
 [node name="Door" parent="NavigationRegion/Door" index="1" unique_id=2076237036]
-collision_layer = 16
 collision_mask = 26
+physics_material_override = SubResource("PhysicsMaterial_lru8w")
+
+[node name="MeshInstance3D" parent="NavigationRegion/Door/Door" index="0" unique_id=1349372116]
+layers = 1
 
 [node name="Interactable" type="RigidBody3D" parent="NavigationRegion" unique_id=113735309]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.084757, 1.3175457, 0)
