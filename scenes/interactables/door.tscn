@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://chimyvnqga3xy"]
+
+[ext_resource type="Script" uid="uid://c0d8mcqgooxpd" path="res://scripts/item/itemtype/thingies.gd" id="1_fnoyy"]
+[ext_resource type="ArrayMesh" uid="uid://c0voy5ldrpccx" path="res://models/door/door.res" id="2_xetrc"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_nmwkn"]
+size = Vector3(0.065, 2.185, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fnoyy"]
+size = Vector3(0.065, 2.185, 0.065)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iyt8h"]
+size = Vector3(0.23931096, 2.1206818, 1.1841944)
+
+[node name="Door" type="Node3D" unique_id=1728379407]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1479032410]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6228769)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=664872977]
+mesh = SubResource("BoxMesh_nmwkn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=515021269]
+shape = SubResource("BoxShape3D_fnoyy")
+
+[node name="Door" type="RigidBody3D" parent="." unique_id=2076237036]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.015984476)
+collision_layer = 24
+collision_mask = 10
+mass = 10.0
+freeze_mode = 1
+angular_damp = 3.0
+script = ExtResource("1_fnoyy")
+object_id = "door"
+prompt_message = "Open"
+metadata/_custom_type_script = "uid://dbmoaxx4ekhf1"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Door" unique_id=1349372116]
+layers = 9
+mesh = ExtResource("2_xetrc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Door" unique_id=1584118977]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.030632019, 0)
+shape = SubResource("BoxShape3D_iyt8h")
+
+[node name="HingeJoint3D" type="HingeJoint3D" parent="." unique_id=1874515509]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0.62479806)
+node_a = NodePath("../StaticBody3D")
+node_b = NodePath("../Door")
+angular_limit/enable = true
+angular_limit/upper = 0.0
+angular_limit/bias = 0.1
+angular_limit/softness = 0.05

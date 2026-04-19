@@ -39,6 +39,14 @@ hit_from_inside = true
 debug_shape_custom_color = Color(0.6509804, 0.003921569, 1, 1)
 debug_shape_thickness = 3
 
+[node name="DoorCheck" type="RayCast3D" parent="." unique_id=1716698579]
+transform = Transform3D(1, 0, 0, 0, 0.06975651, -0.9975641, 0, 0.9975641, 0.06975651, 0, 0.10365093, 0)
+target_position = Vector3(0, -1, -0.08)
+collision_mask = 16
+hit_from_inside = true
+debug_shape_custom_color = Color(0.6380036, 0.4132458, 0.28807846, 1)
+debug_shape_thickness = 4
+
 [node name="StairCheck" type="ShapeCast3D" parent="." unique_id=1979513423]
 transform = Transform3D(-1, -8.742278e-08, 3.821371e-15, 0, -4.371139e-08, -1, 8.742278e-08, -1, 4.371139e-08, 0, -1, -1)
 shape = SubResource("SeparationRayShape3D_42se6")

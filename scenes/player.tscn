@@ -20,11 +20,19 @@ shader_parameter/z_direction = 1.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u8vuu"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_qlg0r"]
+font_size = 24
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 15
+shadow_color = Color(0, 0, 0, 0.101960786)
+shadow_offset = Vector2(-0.52, -0.45)
+
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_dqkch"]
 length = 0.72
 
 [node name="Player" type="CharacterBody3D" unique_id=387199245]
-collision_mask = 2
+collision_mask = 18
 script = ExtResource("1_3vyb7")
 highlight_shader = SubResource("ShaderMaterial_qlg0r")
 
@@ -43,13 +51,13 @@ layers = 2
 mesh = ExtResource("3_qlg0r")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="ItemPivot/Fleshlight" unique_id=1933323465]
-transform = Transform3D(-4.371139e-08, -8.742278e-08, -1, -1.9106853e-15, 1, -8.742278e-08, 1, -1.9106857e-15, -4.371139e-08, 4.6954436, 1.9073486e-06, 0)
+transform = Transform3D(-6.244484e-07, -1.2488968e-06, -14.285714, -2.7295505e-14, 14.285714, -1.2488968e-06, 14.285714, -5.684342e-14, -6.2444843e-07, 7.0846, 5.722046e-06, 0)
 layers = 3
-light_color = Color(0.8666667, 0.92156863, 0.92156863, 1)
+light_color = Color(0.96522576, 0.911187, 0.9114976, 1)
 light_energy = 2.0
-light_indirect_energy = 1.2
 light_volumetric_fog_energy = 12.356
 shadow_enabled = true
+distance_fade_enabled = true
 spot_range = 30.0
 spot_attenuation = 1.75
 spot_angle_attenuation = 2.0
@@ -72,7 +80,9 @@ metadata/_edit_use_anchors_ = true
 [node name="SubViewport" type="SubViewport" parent="CameraPivot/Camera/SubViewportContainer" unique_id=598931813]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(1152, 648)
+msaa_3d = 1
+canvas_item_default_texture_filter = 0
+size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
 [node name="ItemCamera" type="Camera3D" parent="CameraPivot/Camera/SubViewportContainer/SubViewport" unique_id=78291613]
@@ -108,6 +118,24 @@ anchor_bottom = 0.21864197
 offset_right = -0.3199997
 offset_bottom = 0.3199997
 metadata/_edit_use_anchors_ = true
+
+[node name="InteractInfo" type="Label" parent="HUD" unique_id=1507839829]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -87.0
+offset_right = 150.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Your hand seems to not contain a "
+label_settings = SubResource("LabelSettings_qlg0r")
+horizontal_alignment = 1
 
 [node name="StairCheckF" type="CollisionShape3D" parent="." unique_id=2030868919]
 transform = Transform3D(-1, 8.742278e-08, -3.821371e-15, 0, -4.371139e-08, -1, -8.742278e-08, -1, 4.371139e-08, -4.5951467e-08, -0.2813552, -0.52562344)

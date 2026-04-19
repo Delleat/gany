@@ -19,7 +19,10 @@ config/icon="res://icon.svg"
 
 [display]
 
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
+window/vsync/vsync_mode=0
 
 [editor_plugins]
 
@@ -85,12 +88,15 @@ fleshlight={
 3d_physics/layer_2="env"
 3d_physics/layer_3="enemies"
 3d_physics/layer_4="interact"
+3d_physics/layer_5="door"
 
 [physics]
 
 3d/physics_engine="Jolt Physics"
 3d/default_gravity_vector=Vector3(0, -2.5, 0)
+common/physics_interpolation=true
 
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+anti_aliasing/vsync/vsync_mode=0
