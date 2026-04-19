@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://v2oqumouwmc8"]
 
 [ext_resource type="Script" uid="uid://b1mp7krrb45g3" path="res://scripts/main.gd" id="1_c0t4b"]
-[ext_resource type="Shader" uid="uid://8h1wah8ii1cs" path="res://shaders/simple_overcast.gdshader" id="2_y8tpg"]
+[ext_resource type="Environment" uid="uid://esefc0gwfydy" path="res://other/env.tres" id="2_mkbf0"]
 [ext_resource type="PackedScene" uid="uid://hmg05712b413" path="res://scenes/player.tscn" id="3_3c2gk"]
 [ext_resource type="PackedScene" uid="uid://b3jmjnlal3re4" path="res://scenes/gany.tscn" id="4_mkbf0"]
 [ext_resource type="Script" uid="uid://c0d8mcqgooxpd" path="res://scripts/item/itemtype/thingies.gd" id="5_3c2gk"]
@@ -9,41 +9,6 @@
 [ext_resource type="ArrayMesh" uid="uid://l4plwqq1ibmy" path="res://models/table/stu.res" id="6_lru8w"]
 [ext_resource type="PackedScene" uid="uid://10aiwl3a1mhn" path="res://scenes/interactables/key.tscn" id="7_y8tpg"]
 [ext_resource type="Shader" uid="uid://docb0idv6m68j" path="res://shaders/lgbt.gdshader" id="9_mkbf0"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_tefeu"]
-noise_type = 5
-seed = 57
-frequency = 0.0113
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_c0t4b"]
-noise = SubResource("FastNoiseLite_tefeu")
-seamless = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tipki"]
-shader = ExtResource("2_y8tpg")
-shader_parameter/use_directional_light = true
-shader_parameter/sun_color = Color(1, 1, 1, 1)
-shader_parameter/sun_energy = 15.0
-shader_parameter/cloud_color = Color(0.30980393, 0.12941177, 0.14117648, 1)
-shader_parameter/cloud_density = 2.0
-shader_parameter/cloud_depth = 2.0
-shader_parameter/cloud_sag = 2.0
-shader_parameter/noise_texture = SubResource("NoiseTexture2D_c0t4b")
-shader_parameter/noise_tiling = Vector2(1, 1)
-shader_parameter/wind_speed = Vector2(0.5, 0.5)
-shader_parameter/ground_bottom_color = Color(0.2, 0.169, 0.133, 1)
-shader_parameter/ground_curve = 0.04
-shader_parameter/exposure = 1.0
-
-[sub_resource type="Sky" id="Sky_y8tpg"]
-sky_material = SubResource("ShaderMaterial_tipki")
-
-[sub_resource type="Environment" id="Environment_choun"]
-background_mode = 2
-sky = SubResource("Sky_y8tpg")
-ambient_light_source = 3
-reflected_light_source = 2
-volumetric_fog_enabled = true
 
 [sub_resource type="Shader" id="Shader_mkbf0"]
 code = "shader_type spatial;
@@ -130,7 +95,7 @@ script = ExtResource("1_c0t4b")
 player = NodePath("Player")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=48210793]
-environment = SubResource("Environment_choun")
+environment = ExtResource("2_mkbf0")
 
 [node name="Player" parent="." unique_id=387199245 instance=ExtResource("3_3c2gk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0223389, 1.0000001, 1.5112422)
@@ -138,12 +103,6 @@ max_stamina = 1000.0
 throw_force = 13.0
 highlight_shader = SubResource("ShaderMaterial_3c2gk")
 camera_smoothing = false
-
-[node name="SpotLight3D" parent="Player/ItemPivot/Fleshlight" parent_id_path=PackedInt32Array(387199245, 1241299602) index="0" unique_id=1933323465]
-transform = Transform3D(-6.244484e-07, -1.248897e-06, -14.285715, -2.7295503e-14, 14.285716, -1.2488969e-06, 14.285714, -2.7295513e-14, -6.2444843e-07, 5.456585, 1.9073486e-06, 0)
-shadow_enabled = false
-spot_angle = 24.3
-spot_angle_attenuation = 3.138357
 
 [node name="Enemies" type="Node3D" parent="." unique_id=1047872253]
 
@@ -249,5 +208,3 @@ transform = Transform3D(1, 0, 0, 0, -0.95413065, 0.2993906, 0, -0.2993906, -0.95
 spot_range = 26.949453
 spot_attenuation = 0.26
 spot_angle = 61.513813
-
-[editable path="Player"]
