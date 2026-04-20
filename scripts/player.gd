@@ -29,6 +29,7 @@ signal item_dropped(Item)
 @onready var cam := $CameraPivot/Camera
 @onready var coll := $Collision
 @onready var debug := $HUD/Debug
+@onready var interact_info := $HUD/InteractInfo
 @onready var ceiling_ray_check := $CeilingCheck
 @onready var item_pivot := $ItemPivot
 @onready var item_pos := $ItemPivot/ItemPos
@@ -174,20 +175,20 @@ func handle_door_physics():
 		var ray = $CameraPivot/InteractRay
 		if ray.is_colliding():
 			var collider = ray.get_collider()
-			if collider is Thingies and collider.object_id == "door":
+			if collider is Door:
 				if collider.is_locked:
 					return 
 				
 				grabbed_door = collider
-
+	
 	if Input.is_action_just_released("grab"):
 		grabbed_door = null
-
+	
 	if grabbed_door:
 		var push_dir = -pivot.global_basis.z
 		push_dir.y = 0
 		push_dir = push_dir.normalized()
-
+	
 		if abs(mouse_input_y) > 0.01:
 			grabbed_door.sleeping = false
 			var force_vector = push_dir * (-mouse_input_y * door_pull_force)
@@ -221,7 +222,6 @@ func throw_item():
 	mesh.set_layer_mask_value(1, true)
 	mesh.set_layer_mask_value(2, false)
 	
-	if throw_ray.is_colliding():
-		item_to_throw.global_position = pivot.global_position
-	else:
+	item_to_throw.global_position = pivot.global_position
+	if !throw_ray.is_colliding():
 		item_to_throw.apply_central_impulse(-pivot.global_basis.z * throw_force)
