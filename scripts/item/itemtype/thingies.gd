@@ -5,6 +5,7 @@ class_name Thingies
 var is_locked := true
 var info_tween: Tween
 var interact_info
+
 func interact(player: Node) -> void:
 	interact_info = player.get_node("HUD/InteractInfo")
 	match object_id:

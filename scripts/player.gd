@@ -34,6 +34,7 @@ signal item_dropped(Item)
 @onready var item_pos := $ItemPivot/ItemPos
 @onready var item_camera := $CameraPivot/Camera/SubViewportContainer/SubViewport/ItemCamera
 @onready var fleshlight := $ItemPivot/Fleshlight/SpotLight3D
+@onready var throw_ray := $ItemPivot/ItemPos/ThrowRay
 
 enum State { Walking, Crouching, Running }
 
@@ -65,19 +66,18 @@ func _unhandled_input(event):
 			target_rotation_x = clamp(target_rotation_x - event.relative.y * mouse_sensitivity, -1.4, 1.4)
 			target_rotation_y -= event.relative.x * mouse_sensitivity
 
-func _process(delta: float):
+func _physics_process(delta: float):
 	pivot.rotation.x = lerp_angle(pivot.rotation.x, target_rotation_x, delta * smoothing_amount)
 	pivot.rotation.y = lerp_angle(pivot.rotation.y, target_rotation_y, delta * smoothing_amount)
 	
 	item_pivot.rotation.x = lerp_angle(item_pivot.rotation.x, pivot.rotation.x, delta * 20.0)
 	item_pivot.rotation.y = lerp_angle(item_pivot.rotation.y, pivot.rotation.y, delta * 20.0)
 	
-	item_camera.global_transform = pivot.global_transform
 	handle_head_bob(delta)
+	item_camera.global_transform = cam.global_transform
 	
 	debug.text = "%d FPS\nState: %s\nStamina: %d" % [Engine.get_frames_per_second(), State.keys()[player_state], current_stamina]
-
-func _physics_process(delta: float):
+	
 	handle_gravity(delta)
 	handle_controls(delta)
 	handle_movement(delta)
@@ -107,7 +107,7 @@ func handle_controls(delta):
 		is_sprint_toggled = false
 	elif current_stamina >= max_stamina * 0.2:
 		stamina_cooled_down = true
-
+	
 	if crouch_is_toggle:
 		if Input.is_action_just_pressed("jaja badzo w du"):
 			is_crouch_toggled = !is_crouch_toggled
@@ -115,15 +115,16 @@ func handle_controls(delta):
 		is_crouch_toggled = Input.is_action_pressed("jaja badzo w du")
 	
 	var is_crouching = is_crouch_toggled or ceiling_ray_check.is_colliding()
-
+	
+	var sprint_req = is_moving and stamina_cooled_down and input_dir.y < 0
 	if sprint_is_toggle:
-		if Input.is_action_just_pressed("jaja w barco pszut") and is_moving and stamina_cooled_down:
+		if sprint_req and Input.is_action_just_pressed("jaja w barco pszut"):
 			is_sprint_toggled = !is_sprint_toggled
-		if not is_moving or not stamina_cooled_down: 
+		elif !sprint_req:
 			is_sprint_toggled = false
 	else:
-		is_sprint_toggled = Input.is_action_pressed("jaja w barco pszut") and is_moving and stamina_cooled_down
-
+		is_sprint_toggled = sprint_req and Input.is_action_pressed("jaja w barco pszut")
+	
 	if is_crouching:
 		player_state = State.Crouching
 		current_speed = crouch_speed
@@ -211,11 +212,16 @@ func throw_item():
 	if not held_item: return
 	var item_to_throw = held_item
 	held_item = null
+	
 	item_dropped.emit(item_to_throw)
-	item_to_throw.reparent(get_tree().root)
 	item_to_throw.freeze = false
 	item_to_throw.set_collision_layer_value(4, true)
+	
 	var mesh = item_to_throw.get_node("Mesh")
 	mesh.set_layer_mask_value(1, true)
 	mesh.set_layer_mask_value(2, false)
-	item_to_throw.apply_central_impulse(-pivot.global_basis.z * throw_force)
+	
+	if throw_ray.is_colliding():
+		item_to_throw.global_position = pivot.global_position
+	else:
+		item_to_throw.apply_central_impulse(-pivot.global_basis.z * throw_force)

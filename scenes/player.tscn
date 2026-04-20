@@ -45,21 +45,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 [node name="ItemPos" type="Node3D" parent="ItemPivot" unique_id=320240858]
 transform = Transform3D(4.371139e-08, -1, 1.509958e-07, -1, -4.371139e-08, -3.529303e-22, 6.6002366e-15, -1.509958e-07, -1, 0.6984162, -0.35518098, -0.64375335)
 
+[node name="ThrowRay" type="RayCast3D" parent="ItemPivot/ItemPos" unique_id=692560717]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+target_position = Vector3(0, 0, 2)
+collision_mask = 2
+hit_from_inside = true
+
 [node name="Fleshlight" type="MeshInstance3D" parent="ItemPivot" unique_id=1241299602]
 transform = Transform3D(-3.059797e-09, 0.07, -3.059797e-09, 0, -3.059797e-09, -0.07, -0.07, -3.059797e-09, 1.3374798e-16, -0.637, -0.355, -0.444)
 layers = 2
 mesh = ExtResource("3_qlg0r")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="ItemPivot/Fleshlight" unique_id=1933323465]
-transform = Transform3D(-6.244484e-07, -1.2488968e-06, -14.285714, -2.7295505e-14, 14.285714, -1.2488968e-06, 14.285714, -5.684342e-14, -6.2444843e-07, 7.0846, 5.722046e-06, 0)
+transform = Transform3D(-4.371139e-08, -8.742278e-08, -1, -1.9106853e-15, 1, -8.742278e-08, 1, -1.9106857e-15, -4.371139e-08, 5.7450557, 5.722046e-06, 0)
 layers = 3
 light_color = Color(0.96522576, 0.911187, 0.9114976, 1)
 light_energy = 2.0
 light_volumetric_fog_energy = 12.356
 shadow_enabled = true
 distance_fade_enabled = true
-spot_range = 30.0
-spot_attenuation = 1.75
+spot_range = 20.0
+spot_attenuation = 1.2
 spot_angle_attenuation = 2.0
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=964653165]
@@ -67,6 +73,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 
 [node name="Camera" type="Camera3D" parent="CameraPivot" unique_id=258885141]
 cull_mask = 1048573
+far = 50.0
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="CameraPivot/Camera" unique_id=1156630650]
 anchors_preset = 15
@@ -82,16 +89,19 @@ transparent_bg = true
 handle_input_locally = false
 msaa_3d = 1
 canvas_item_default_texture_filter = 0
-size = Vector2i(1920, 1080)
+size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
 [node name="ItemCamera" type="Camera3D" parent="CameraPivot/Camera/SubViewportContainer/SubViewport" unique_id=78291613]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 cull_mask = 1047554
+far = 50.0
 
 [node name="InteractRay" parent="CameraPivot" unique_id=336290294 instance=ExtResource("2_qhqgy")]
 collision_mask = 8
 hit_from_inside = true
-debug_shape_custom_color = Color(0, 0, 1, 1)
+debug_shape_custom_color = Color(0, 0, 0, 0)
+debug_shape_thickness = 1
 
 [node name="CeilingCheck" type="RayCast3D" parent="." unique_id=127428820]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)

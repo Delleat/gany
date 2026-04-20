@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://10aiwl3a1mhn"]
+
+[ext_resource type="Script" uid="uid://bm340rve1n8bx" path="res://scripts/item.gd" id="1_owfkr"]
+[ext_resource type="ArrayMesh" uid="uid://dg3bkxylhlnsv" path="res://models/keys/key.res" id="2_fwhnj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_owfkr"]
+size = Vector3(0.37402344, 0.123046875, 0.65478516)
+
+[node name="Key" type="RigidBody3D" unique_id=1543281867]
+collision_layer = 8
+collision_mask = 10
+mass = 2.0
+script = ExtResource("1_owfkr")
+item_name = "Kurwa Key"
+item_id = "key0"
+prompt_message = "Pick up"
+metadata/_custom_type_script = "uid://bm340rve1n8bx"
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1487214554]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = ExtResource("2_fwhnj")
+
+[node name="Collision" type="CollisionShape3D" parent="." unique_id=1101151844]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.17163086)
+shape = SubResource("BoxShape3D_owfkr")

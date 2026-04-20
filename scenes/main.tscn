@@ -8,7 +8,7 @@
 [ext_resource type="ArrayMesh" uid="uid://l4plwqq1ibmy" path="res://models/table/stu.res" id="4_tefeu"]
 [ext_resource type="ArrayMesh" uid="uid://bvak1kvpl1j0" path="res://models/chair/chair.res" id="5_o6xl0"]
 [ext_resource type="Script" uid="uid://dacvp2yodvx8g" path="res://addons/linear_stairs/nodes/csg_linear_stairs.gd" id="7_tipki"]
-[ext_resource type="ArrayMesh" uid="uid://bco4681bm6ooj" path="res://models/door/door.res" id="8_85g3d"]
+[ext_resource type="ArrayMesh" uid="uid://c0voy5ldrpccx" path="res://models/door/door.res" id="8_85g3d"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ah057"]
 resource_name = "ConcreteFloor"
@@ -288,7 +288,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0223389, 1.0000001, 1.5112
 max_stamina = 1000.0
 throw_force = 13.0
 highlight_shader = SubResource("ShaderMaterial_0wfyh")
-camera_smoothing = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=408731699]
 visible = false
