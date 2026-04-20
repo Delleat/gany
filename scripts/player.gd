@@ -18,7 +18,7 @@ signal item_dropped(Item)
 
 @export_group("Options")
 @export var sprint_is_toggle := false # toggle for settings which we will not probably even use btw
-@export var crouch_is_toggle := false # toggle for settings which we will not probably even use btw v2
+@export var crouch_is_toggle := true # toggle for settings which we will not probably even use btw v2
 
 @export_group("Misc")
 @export var throw_force := 10.0
