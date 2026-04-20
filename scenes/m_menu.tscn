@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://cp182mr5mco2c"]
+
+[ext_resource type="ArrayMesh" uid="uid://bspxeaolayfin" path="res://models/lamp_main_menu/lampp.res" id="1_henk5"]
+[ext_resource type="Script" uid="uid://c7voqjil8ngmo" path="res://scripts/m_menu.gd" id="1_yvnh4"]
+[ext_resource type="Theme" uid="uid://3b6jfloh1m1l" path="res://other/ui_themee.tres" id="3_c7gyy"]
+[ext_resource type="ArrayMesh" uid="uid://dfra3fpldjnhw" path="res://models/couch/couch.res" id="3_yvnh4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jru4g"]
+albedo_color = Color(0, 0, 0, 1)
+metallic_specular = 1.0
+roughness = 0.65
+
+[sub_resource type="Environment" id="Environment_mkhta"]
+tonemap_mode = 3
+ssao_enabled = true
+ssao_radius = 25.55
+ssao_detail = 2.2
+ssao_sharpness = 0.93
+ssao_light_affect = 0.3
+ssao_ao_channel_affect = 0.25
+ssil_enabled = true
+ssil_radius = 8.6
+ssil_intensity = 16.25
+ssil_sharpness = 1.0
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+
+[node name="MMenu" type="Node3D" unique_id=766150803]
+script = ExtResource("1_yvnh4")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=668210798]
+transform = Transform3D(-1.7178574e-07, 0, 3.9299996, 0, 3.9299998, 0, -3.9299996, 0, -1.7178574e-07, -0.9619771, -0.001373291, -4.6237936)
+size = Vector3(6.962617, 0.024, 3.781948)
+material = SubResource("StandardMaterial3D_jru4g")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=620046005]
+transform = Transform3D(-1.7178574e-07, 3.9299996, -1.7178574e-07, 0, -1.7178574e-07, -3.9299998, -3.9299996, -1.7178574e-07, 7.508994e-15, -2.8522053, 3.7480528, -3.533204)
+size = Vector3(7.7576146, 0.024, 2.552572)
+material = SubResource("StandardMaterial3D_jru4g")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=840453003]
+transform = Transform3D(0.18223552, -0.13004175, 0.97461754, 0, 0.9912155, 0.13225639, -0.9832549, -0.024101812, 0.18063468, 6.455, 3.085, 1.362)
+environment = SubResource("Environment_mkhta")
+fov = 55.0
+far = 55.54
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2006028235]
+transform = Transform3D(0.1376006, -0.025808426, 0, 0.025808426, 0.1376006, 0, 0, 0, 0.13999999, 0, 4.8035054, 0.113459766)
+mesh = ExtResource("1_henk5")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=634819967]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 4.8605413, 0.11319423)
+light_energy = 9.585
+light_indirect_energy = 1.41
+light_size = 9.48
+spot_range = 8.215
+spot_angle = 55.65
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=699625199]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.03854, 0)
+mesh = ExtResource("3_yvnh4")
+
+[node name="Control" type="Control" parent="." unique_id=1271269567]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=2079291466]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -555.0
+offset_top = -88.75
+offset_right = -336.0
+offset_bottom = 88.75
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Play" type="Button" parent="Control/VBoxContainer" unique_id=1290420984]
+layout_mode = 2
+theme = ExtResource("3_c7gyy")
+text = "Pley"
+
+[node name="Settings" type="Button" parent="Control/VBoxContainer" unique_id=1177516972]
+layout_mode = 2
+theme = ExtResource("3_c7gyy")
+text = "Settis
+"
+
+[node name="Quit" type="Button" parent="Control/VBoxContainer" unique_id=1717875408]
+layout_mode = 2
+theme = ExtResource("3_c7gyy")
+text = "Wypierdaja"
+
+[connection signal="pressed" from="Control/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

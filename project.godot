@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="marcin"
-run/main_scene="uid://v2oqumouwmc8"
+run/main_scene="uid://cp182mr5mco2c"
 config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
@@ -85,6 +85,10 @@ grab={
 ]
 }
 
+[input_devices]
+
+sensors/canvas_textures/default_texture_filter=2
+
 [layer_names]
 
 3d_physics/layer_1="player"
@@ -100,5 +104,9 @@ common/physics_interpolation=true
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=2
 rendering_device/driver.windows="d3d12"
+scaling_3d/mode=2
+scaling_3d/fsr_sharpness=0.5
+anti_aliasing/quality/use_taa=true
 anti_aliasing/vsync/vsync_mode=0
