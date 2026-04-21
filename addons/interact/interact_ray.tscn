@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c6rbe48b3hp0n"]
 
 [ext_resource type="Script" uid="uid://dcpcfijfwfp1u" path="res://addons/interact/src/interact_ray.gd" id="1_fp8uo"]
-[ext_resource type="Theme" uid="uid://rxccg77x7mel" path="res://other/ui_theme.tres" id="2_84yuy"]
+[ext_resource type="Theme" uid="uid://rxccg77x7mel" path="res://other/hud_theme.tres" id="2_84yuy"]
 
 [node name="InteractRay" type="RayCast3D" unique_id=54768646]
 target_position = Vector3(0, 0, -2)

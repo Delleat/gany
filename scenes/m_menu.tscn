@@ -2,8 +2,9 @@
 
 [ext_resource type="ArrayMesh" uid="uid://bspxeaolayfin" path="res://models/lamp_main_menu/lampp.res" id="1_henk5"]
 [ext_resource type="Script" uid="uid://c7voqjil8ngmo" path="res://scripts/m_menu.gd" id="1_yvnh4"]
-[ext_resource type="Theme" uid="uid://3b6jfloh1m1l" path="res://other/ui_themee.tres" id="3_c7gyy"]
+[ext_resource type="Theme" uid="uid://3b6jfloh1m1l" path="res://other/ui_theme.tres" id="3_c7gyy"]
 [ext_resource type="ArrayMesh" uid="uid://dfra3fpldjnhw" path="res://models/couch/couch.res" id="3_yvnh4"]
+[ext_resource type="Script" uid="uid://dpv1fh6un2hkj" path="res://scripts/settings_menu.gd" id="5_uf733"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jru4g"]
 albedo_color = Color(0, 0, 0, 1)
@@ -67,8 +68,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_c7gyy")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=2079291466]
+[node name="SelectMenu" type="VBoxContainer" parent="Control" unique_id=2079291466]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -83,22 +86,90 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Play" type="Button" parent="Control/VBoxContainer" unique_id=1290420984]
+[node name="Play" type="Button" parent="Control/SelectMenu" unique_id=1290420984]
 layout_mode = 2
 theme = ExtResource("3_c7gyy")
 text = "Pley"
 
-[node name="Settings" type="Button" parent="Control/VBoxContainer" unique_id=1177516972]
+[node name="Settings" type="Button" parent="Control/SelectMenu" unique_id=1177516972]
 layout_mode = 2
 theme = ExtResource("3_c7gyy")
 text = "Settis
 "
 
-[node name="Quit" type="Button" parent="Control/VBoxContainer" unique_id=1717875408]
+[node name="Quit" type="Button" parent="Control/SelectMenu" unique_id=1717875408]
 layout_mode = 2
 theme = ExtResource("3_c7gyy")
 text = "Wypierdaja"
 
-[connection signal="pressed" from="Control/VBoxContainer/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="Control/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="Control/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[node name="Settings" type="Control" parent="Control" unique_id=210486082]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_uf733")
+
+[node name="Background" type="ColorRect" parent="Control/Settings" unique_id=380895344]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.69411767)
+
+[node name="Label" type="Label" parent="Control/Settings" unique_id=1204647499]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.38793054
+anchor_top = 0.040123455
+anchor_right = 0.6120694
+anchor_bottom = 0.13993827
+offset_left = 0.104003906
+offset_right = -0.104003906
+offset_bottom = 0.3199997
+grow_horizontal = 2
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Settings" unique_id=1505730260]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4670139
+anchor_top = 0.20322224
+anchor_right = 0.5329861
+anchor_bottom = 0.7967776
+offset_top = 0.3119812
+offset_bottom = -0.31204224
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+
+[node name="Vsync" type="CheckBox" parent="Control/Settings/VBoxContainer" unique_id=2009593268]
+layout_mode = 2
+text = "Vsync"
+
+[node name="Back" type="Button" parent="Control/Settings" unique_id=1588488634]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.9233125
+anchor_top = 0.94104934
+anchor_right = 1.0
+anchor_bottom = 1.0000001
+offset_left = 0.34399414
+offset_top = 0.2000122
+grow_horizontal = 0
+grow_vertical = 0
+text = "Back"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="Control/SelectMenu/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Control/SelectMenu/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Control/SelectMenu/Quit" to="." method="_on_quit_pressed"]
+[connection signal="back" from="Control/Settings" to="." method="_on_settings_back"]
+[connection signal="toggled" from="Control/Settings/VBoxContainer/Vsync" to="Control/Settings" method="_on_vsync_toggled"]
+[connection signal="pressed" from="Control/Settings/Back" to="Control/Settings" method="_on_back_pressed"]

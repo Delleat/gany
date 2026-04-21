@@ -96,7 +96,6 @@ player = NodePath("Player")
 [node name="Player" parent="." unique_id=387199245 instance=ExtResource("3_3c2gk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0223389, 1.0000001, 1.5112422)
 max_stamina = 500.0
-crouch_is_toggle = true
 throw_force = 13.0
 highlight_shader = SubResource("ShaderMaterial_3c2gk")
 

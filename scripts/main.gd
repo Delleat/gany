@@ -11,6 +11,8 @@ var items_to_inspect: Dictionary[Item, float] = {}
 var hot_spots: Array[Vector3] = []
 
 func _ready() -> void:
+	print(SettingsData.vsync)
+	
 	for spot in hotspots.get_children():
 		hot_spots.append(spot.position)
 	

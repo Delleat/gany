@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b80kmh14qra0g" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="Shader" uid="uid://472vwpmd1gky" path="res://shaders/highlight.gdshader" id="2_dqkch"]
 [ext_resource type="PackedScene" uid="uid://c6rbe48b3hp0n" path="res://addons/interact/interact_ray.tscn" id="2_qhqgy"]
-[ext_resource type="Theme" uid="uid://rxccg77x7mel" path="res://other/ui_theme.tres" id="3_dqkch"]
+[ext_resource type="Theme" uid="uid://rxccg77x7mel" path="res://other/hud_theme.tres" id="3_dqkch"]
 [ext_resource type="ArrayMesh" uid="uid://c72tyum3o0tha" path="res://models/fleshlight/fleshlight.res" id="3_qlg0r"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qlg0r"]
