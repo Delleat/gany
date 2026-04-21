@@ -12,6 +12,9 @@ var hot_spots: Array[Vector3] = []
 
 func _ready() -> void:
 	print(SettingsData.vsync)
+	player.crouch_is_toggle = SettingsData.toggle_crouch
+	player.sprint_is_toggle = SettingsData.toggle_sprint
+	player.camera_smoothing = SettingsData.camera_smoothing
 	
 	for spot in hotspots.get_children():
 		hot_spots.append(spot.position)

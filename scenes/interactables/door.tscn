@@ -47,5 +47,6 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0
 node_a = NodePath("../StaticBody3D")
 node_b = NodePath("../Door")
 angular_limit/enable = true
+angular_limit/lower = 0.0
 
 [connection signal="_interacted" from="Door" to="Door" method="_on__interacted"]

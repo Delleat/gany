@@ -71,7 +71,6 @@ grow_vertical = 2
 theme = ExtResource("3_c7gyy")
 
 [node name="SelectMenu" type="VBoxContainer" parent="Control" unique_id=2079291466]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -103,6 +102,7 @@ theme = ExtResource("3_c7gyy")
 text = "Wypierdaja"
 
 [node name="Settings" type="Control" parent="Control" unique_id=210486082]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -136,20 +136,69 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/Settings" unique_id=1505730260]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Settings" unique_id=1079637672]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.4670139
-anchor_top = 0.20322224
-anchor_right = 0.5329861
-anchor_bottom = 0.7967776
-offset_top = 0.3119812
-offset_bottom = -0.31204224
+anchor_left = 0.13823265
+anchor_top = 0.23751855
+anchor_right = 0.8617675
+anchor_bottom = 0.7624815
+offset_left = -0.24401855
+offset_top = 0.08798218
+offset_right = 0.24401855
+offset_bottom = -0.088012695
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_group_ = true
+alignment = 1
+metadata/_edit_use_anchors_ = true
 
-[node name="Vsync" type="CheckBox" parent="Control/Settings/VBoxContainer" unique_id=2009593268]
+[node name="Movement" type="VBoxContainer" parent="Control/Settings/HBoxContainer" unique_id=1505730260]
+layout_mode = 2
+metadata/_edit_group_ = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Control/Settings/HBoxContainer/Movement" unique_id=2085470305]
+layout_mode = 2
+text = "Movement"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="HSeparator" type="HSeparator" parent="Control/Settings/HBoxContainer/Movement" unique_id=1633104972]
+layout_mode = 2
+
+[node name="SprintToggle" type="CheckBox" parent="Control/Settings/HBoxContainer/Movement" unique_id=587938274]
+layout_mode = 2
+text = "Toggle sprint"
+
+[node name="CrouchToggle" type="CheckBox" parent="Control/Settings/HBoxContainer/Movement" unique_id=286264813]
+layout_mode = 2
+button_pressed = true
+text = "Toggle Crouch"
+
+[node name="CameraSmoothing" type="CheckBox" parent="Control/Settings/HBoxContainer/Movement" unique_id=1507129282]
+layout_mode = 2
+text = "Camera Smoothing"
+
+[node name="VSeparator" type="VSeparator" parent="Control/Settings/HBoxContainer" unique_id=1167033945]
+layout_mode = 2
+
+[node name="Visuals" type="VBoxContainer" parent="Control/Settings/HBoxContainer" unique_id=1351671253]
+layout_mode = 2
+metadata/_edit_group_ = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Control/Settings/HBoxContainer/Visuals" unique_id=515861047]
+layout_mode = 2
+text = "Visuals"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="HSeparator" type="HSeparator" parent="Control/Settings/HBoxContainer/Visuals" unique_id=860621104]
+layout_mode = 2
+
+[node name="Vsync" type="CheckBox" parent="Control/Settings/HBoxContainer/Visuals" unique_id=2009593268]
 layout_mode = 2
 text = "Vsync"
 
@@ -170,6 +219,8 @@ metadata/_edit_use_anchors_ = true
 [connection signal="pressed" from="Control/SelectMenu/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Control/SelectMenu/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="Control/SelectMenu/Quit" to="." method="_on_quit_pressed"]
-[connection signal="back" from="Control/Settings" to="." method="_on_settings_back"]
-[connection signal="toggled" from="Control/Settings/VBoxContainer/Vsync" to="Control/Settings" method="_on_vsync_toggled"]
-[connection signal="pressed" from="Control/Settings/Back" to="Control/Settings" method="_on_back_pressed"]
+[connection signal="toggled" from="Control/Settings/HBoxContainer/Movement/SprintToggle" to="Control/Settings" method="_on_sprint_toggle_toggled"]
+[connection signal="toggled" from="Control/Settings/HBoxContainer/Movement/CrouchToggle" to="Control/Settings" method="_on_crouch_toggle_toggled"]
+[connection signal="toggled" from="Control/Settings/HBoxContainer/Movement/CameraSmoothing" to="Control/Settings" method="_on_camera_smoothing_toggled"]
+[connection signal="toggled" from="Control/Settings/HBoxContainer/Visuals/Vsync" to="Control/Settings" method="_on_vsync_toggled"]
+[connection signal="pressed" from="Control/Settings/Back" to="." method="_on_settings_back"]

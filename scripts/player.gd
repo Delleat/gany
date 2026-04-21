@@ -19,6 +19,7 @@ signal item_dropped(Item)
 @export_group("Options")
 @export var sprint_is_toggle := false # toggle for settings which we will not probably even use btw
 @export var crouch_is_toggle := true # toggle for settings which we will not probably even use btw v2
+@export var camera_smoothing := false
 
 @export_group("Misc")
 @export var throw_force := 10.0
@@ -68,8 +69,12 @@ func _unhandled_input(event):
 			target_rotation_y -= event.relative.x * mouse_sensitivity
 
 func _physics_process(delta: float):
-	pivot.rotation.x = lerp_angle(pivot.rotation.x, target_rotation_x, delta * smoothing_amount)
-	pivot.rotation.y = lerp_angle(pivot.rotation.y, target_rotation_y, delta * smoothing_amount)
+	if camera_smoothing:
+		pivot.rotation.x = lerp_angle(pivot.rotation.x, target_rotation_x, delta * smoothing_amount)
+		pivot.rotation.y = lerp_angle(pivot.rotation.y, target_rotation_y, delta * smoothing_amount)
+	else:
+		pivot.rotation.x = target_rotation_x
+		pivot.rotation.y = target_rotation_y
 	
 	item_pivot.rotation.x = lerp_angle(item_pivot.rotation.x, pivot.rotation.x, delta * 20.0)
 	item_pivot.rotation.y = lerp_angle(item_pivot.rotation.y, pivot.rotation.y, delta * 20.0)
