@@ -99,6 +99,7 @@ func _physics_process(delta: float):
 		throw_item()
 		
 	move_and_slide()
+	push_rigid_bodies()
 
 func handle_gravity(delta):
 	if not is_on_floor():
@@ -230,3 +231,27 @@ func throw_item():
 	item_to_throw.global_position = pivot.global_position
 	if !throw_ray.is_colliding():
 		item_to_throw.apply_central_impulse(-pivot.global_basis.z * throw_force)
+
+func push_rigid_bodies():
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var body = collision.get_collider()
+
+		if body is RigidBody3D:
+			if body.mass >= 30:
+				continue
+
+			var push_dir = -collision.get_normal()
+			
+			push_dir.y = 0.2
+			push_dir = push_dir.normalized()
+
+			var speed = velocity.length()
+			var velocity_relative_to_normal = velocity.dot(push_dir)
+			
+			if velocity_relative_to_normal > 0.2:
+				var min_force = 2.0
+				var force = max(speed, min_force)
+
+				var impulse = push_dir * force * body.mass * 8
+				body.apply_central_impulse(impulse)

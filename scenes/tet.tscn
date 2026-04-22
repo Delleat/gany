@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dacvp2yodvx8g" path="res://addons/linear_stairs/nodes/csg_linear_stairs.gd" id="5_fvcc2"]
 [ext_resource type="PackedScene" uid="uid://chimyvnqga3xy" path="res://scenes/interactables/door.tscn" id="5_lru8w"]
 [ext_resource type="ArrayMesh" uid="uid://l4plwqq1ibmy" path="res://models/table/stu.res" id="6_lru8w"]
+[ext_resource type="ArrayMesh" uid="uid://iuy22fetso2f" path="res://models/chair/chair.res" id="7_mkbf0"]
 [ext_resource type="PackedScene" uid="uid://10aiwl3a1mhn" path="res://scenes/interactables/key.tscn" id="8_mkbf0"]
 [ext_resource type="Shader" uid="uid://docb0idv6m68j" path="res://shaders/lgbt.gdshader" id="9_mkbf0"]
 
@@ -52,6 +53,13 @@ shader_parameter/angle_fade = 1.0
 shader_parameter/x_direction = 1.0
 shader_parameter/y_direction = 1.0
 shader_parameter/z_direction = 1.0
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fvcc2"]
+friction = 0.2
+bounce = 0.3
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_lru8w"]
+points = PackedVector3Array(-0.09031069, 2.7739556, -1.3390107, -0.250703, 0.69430304, -1.4995769, -0.250703, 0.69430304, 0.22284359, 1.5268223, 0.8876999, 0.008450568, 1.2717606, -0.579365, -1.4015591, -0.047740214, -0.5715502, 0.121162556, -0.27582413, 2.5607402, 0.195738, 1.3111567, 0.8876999, -1.5548556, 1.2651896, -0.563188, 0.11724285, -0.056141995, -0.59223473, -1.4075918, 1.2571507, 0.8876999, 0.27812225, -0.09031069, 2.7739556, 0.062456667, -0.26677498, 2.493253, -1.5156505, 1.5268223, 0.8876999, -1.2850046, -0.09031069, 2.5041046, 0.27812225, -0.09031069, 2.5578046, -1.5548556, 1.3120973, -0.5558233, 0.013491914, 0.0046971035, -0.566983, -1.4461691, -0.2780486, 2.7213807, -1.3176583, -0.09071, -0.5542044, 0.062849686, 1.1705229, -0.5814083, -1.4533811, 1.3147185, -0.5618175, -1.2924929, -0.093403056, -0.56036156, -1.3422766, 1.364804, 0.8876999, 0.22411615, -0.09031069, 2.7199178, -1.4470229, -0.2740655, 2.7138824, 0.03805265, 1.4728162, 0.8876999, -1.3930168, 1.4728162, 0.8876999, 0.11628336, -0.09031069, 2.61218, 0.22411615, -0.25924325, 2.4298894, 0.23138466, -0.09031069, 2.6655421, -1.5008495, -0.27108824, 2.6039915, -1.4680141)
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_sugp2"]
 vertices = PackedVector3Array(-8.75, 0.45, -7.5, -8.75, 0.45, -8, -10.25, 0.45, -8, -13.25, 0.45, -7.5, -29.25, 0.45, -5.75, -13.75, 0.45, -5.75, -13.75, 0.45, -7, -10.75, 0.45, -8.5, -10.75, 0.45, -11, -10.25, 0.45, -24.25, -29.25, 0.45, -24.25, -10.25, 0.45, -11.25, -9.75, 4.45, -6, -12.25, 4.45, -5.75, -5.75, 4.45, -5.75, -8.25, 4.45, -6, -9.25, 0.7, -11, -7.5, 0.45, -11.25, -7.5, 0.45, -24.25, -8.375, 0.7, -11.125, -9.25, 4.45, -6.5, -8.75, 4.45, -6.5, -8.75, 1.2, -10.75, -9.25, 3.7, -7.625, -8.75, 3.7, -7.916666, -7.5, 0.45, -8, -4.5, 0.45, -7.5, -7, 0.45, -11, -7, 0.45, -8.5, -4, 0.45, -7, -4, 0.45, -5, -0.5, 0.45, -4, 1.75, 0.45, -4.25, 2.5, 0.45, -3.5, 2.5, 0.45, -2, 29.25, 0.45, -2.25, 29.25, 0.45, -24.25, -3.75, 0.45, 1.25, -3.25, 0.45, 2, -1, 0.45, 0.75, -1, 0.45, -3.5, -4.5, 0.45, -4.25, -13.25, 0.45, -4.25, -5, 0.45, 3.75, -5, 0.45, 1.75, -4, 0.45, 24.25, -4, 0.45, 4.25, -29.25, 0.45, 24.25, 0.5, 1.7, -2.75, 0.5, 1.7, -0.25, 1, 1.7, -0.25, 1, 1.7, -2.75, 2.5, 0.45, -0.75, 29.25, 0.45, -0.5, -0.5, 0.45, 1.25, -3.25, 0.45, 3.75, 2, 0.45, 1.25, 2.5, 0.45, 0.75, 29.25, 0.45, 24.25)
@@ -100,10 +108,10 @@ throw_force = 13.0
 highlight_shader = SubResource("ShaderMaterial_3c2gk")
 
 [node name="Enemies" type="Node3D" parent="." unique_id=1047872253]
-visible = false
 
 [node name="Gany" parent="Enemies" unique_id=252602011 instance=ExtResource("4_mkbf0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.612, 1, -11.636)
+collision_mask = 18
 walk_speed = 3.0
 run_speed = 4.1
 
@@ -120,6 +128,34 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.094723, 9.536743e-07, -12.
 
 [node name="Pos3" type="Node3D" parent="HotSpots" unique_id=820174459]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.891174, 9.536743e-07, -16.91716)
+
+[node name="RigidBody3D2" type="RigidBody3D" parent="." unique_id=1536858900]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.845088, 0.8458551, 3.803548)
+collision_mask = 7
+physics_material_override = SubResource("PhysicsMaterial_fvcc2")
+linear_damp = 0.5
+
+[node name="Chair1" type="MeshInstance3D" parent="RigidBody3D2" unique_id=841301988]
+transform = Transform3D(0.17672108, 0, -0.4677282, 0, 0.5, 0, 0.4677282, 0, 0.17672108, 0, 0, 0)
+mesh = ExtResource("7_mkbf0")
+
+[node name="Collision1" type="CollisionShape3D" parent="RigidBody3D2" unique_id=924116179]
+transform = Transform3D(0.17672108, 0, -0.4677282, 0, 0.5, 0, 0.4677282, 0, 0.17672108, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_lru8w")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=1857260399]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8844547, 0.6652417, 2.1839538)
+collision_mask = 7
+physics_material_override = SubResource("PhysicsMaterial_fvcc2")
+linear_damp = 0.5
+
+[node name="Chair1" type="MeshInstance3D" parent="RigidBody3D" unique_id=1031521169]
+transform = Transform3D(0.17672108, 0, -0.4677282, 0, 0.5, 0, 0.4677282, 0, 0.17672108, 0, 0, 0)
+mesh = ExtResource("7_mkbf0")
+
+[node name="Collision1" type="CollisionShape3D" parent="RigidBody3D" unique_id=57929474]
+transform = Transform3D(0.17672108, 0, -0.4677282, 0, 0.5, 0, 0.4677282, 0, 0.17672108, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_lru8w")
 
 [node name="NavigationRegion" type="NavigationRegion3D" parent="." unique_id=1482783104]
 navigation_mesh = SubResource("NavigationMesh_sugp2")
