@@ -26,17 +26,17 @@ signal item_dropped(Item)
 @export var highlight_shader: ShaderMaterial
 @export var door_pull_force := 1.5
 
-@onready var pivot := $CameraPivot
-@onready var cam := $CameraPivot/Camera
-@onready var coll := $Collision
-@onready var debug := $HUD/Debug
-@onready var interact_info := $HUD/InteractInfo
-@onready var ceiling_ray_check := $CeilingCheck
-@onready var item_pivot := $ItemPivot
-@onready var item_pos := $ItemPivot/ItemPos
-@onready var item_camera := $CameraPivot/Camera/SubViewportContainer/SubViewport/ItemCamera
-@onready var fleshlight := $ItemPivot/Fleshlight/SpotLight3D
-@onready var throw_ray := $ItemPivot/ItemPos/ThrowRay
+@onready var pivot: Node3D = $CameraPivot
+@onready var cam: Camera3D = $CameraPivot/Camera
+@onready var coll: CollisionShape3D = $Collision
+@onready var debug: Label = $HUD/Debug
+@onready var interact_info: Label = $HUD/InteractInfo
+@onready var ceiling_ray_check: RayCast3D = $CeilingCheck
+@onready var item_pivot: Node3D = $ItemPivot
+@onready var item_pos: Node3D = $ItemPivot/ItemPos
+@onready var item_camera: Camera3D = $CameraPivot/Camera/SubViewportContainer/SubViewport/ItemCamera
+@onready var fleshlight: SpotLight3D = $ItemPivot/Fleshlight/SpotLight
+@onready var throw_ray: RayCast3D= $ItemPivot/ItemPos/ThrowRay
 
 enum State { Walking, Crouching, Running }
 
@@ -194,7 +194,7 @@ func handle_door_physics():
 		var push_dir = -pivot.global_basis.z
 		push_dir.y = 0
 		push_dir = push_dir.normalized()
-	
+		
 		if abs(mouse_input_y) > 0.01:
 			grabbed_door.sleeping = false
 			var force_vector = push_dir * (-mouse_input_y * door_pull_force)
@@ -234,24 +234,45 @@ func throw_item():
 
 func push_rigid_bodies():
 	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		var body = collision.get_collider()
-
+		var collision := get_slide_collision(i)
+		var body := collision.get_collider()
+		
 		if body is RigidBody3D:
-			if body.mass >= 30:
+			# Disable stair collisions
+			disable_stair_collision(true)
+			
+			# Skip heavy objects
+			if body.mass >= 30 or body.freeze:
 				continue
-
-			var push_dir = -collision.get_normal()
 			
-			push_dir.y = 0.2
+			# 1. Get the global contact point
+			var push_point := collision.get_position()
+			
+			# 2. Calculate direction (away from the player)
+			var push_dir := -collision.get_normal()
+			
+			# Add a slight upward lift to prevent sticking to the floor
+			#push_dir.y = 0.0002
 			push_dir = push_dir.normalized()
-
-			var speed = velocity.length()
-			var velocity_relative_to_normal = velocity.dot(push_dir)
 			
-			if velocity_relative_to_normal > 0.2:
-				var min_force = 2.0
-				var force = max(speed, min_force)
+			# 3. Calculate Impulse
+			var speed = velocity.length()
+			var min_force = 1.0
+			var max_force = 5.0 # Cap the force so it doesn't explode
+			var force = clamp(speed, min_force, max_force)
+			
+			# Reduce the mass influence
+			var impulse = push_dir * force / (body.mass / 2.0)
+			
+			var impulse_point = push_point - body.global_position
+			impulse_point.y = cam.global_position.y
+			body.apply_impulse(impulse, impulse_point)
+		else:
+			# Enable (broken) stair collisions
+			disable_stair_collision(false)
 
-				var impulse = push_dir * force * body.mass * 8
-				body.apply_central_impulse(impulse)
+func disable_stair_collision(to: bool):
+		$StairCheckF.disabled = to
+		$StairCheckB.disabled = to
+		$StairCheckL.disabled = to
+		$StairCheckR.disabled = to

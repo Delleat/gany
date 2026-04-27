@@ -29,6 +29,7 @@ shape = SubResource("BoxShape3D_fnoyy")
 collision_layer = 10
 collision_mask = 2
 mass = 10.0
+freeze = true
 script = ExtResource("1_fnoyy")
 prompt_message = "Open"
 metadata/_custom_type_script = "uid://c0d8mcqgooxpd"

@@ -5,8 +5,8 @@
 [ext_resource type="Material" uid="uid://iry4oosi5hxh" path="res://materials/carpet.res" id="3_85g3d"]
 [ext_resource type="ArrayMesh" uid="uid://l4plwqq1ibmy" path="res://models/table/stu.res" id="4_tefeu"]
 [ext_resource type="ArrayMesh" uid="uid://dfra3fpldjnhw" path="res://models/couch/couch.res" id="5_choun"]
-[ext_resource type="ArrayMesh" uid="uid://iuy22fetso2f" path="res://models/chair/chair.res" id="5_o6xl0"]
 [ext_resource type="Material" uid="uid://ciuumegmi5yov" path="res://materials/dark_wood.res" id="6_85g3d"]
+[ext_resource type="PackedScene" uid="uid://bgs5atn4f4byl" path="res://scenes/chair.tscn" id="6_choun"]
 [ext_resource type="Script" uid="uid://dacvp2yodvx8g" path="res://addons/linear_stairs/nodes/csg_linear_stairs.gd" id="7_tipki"]
 [ext_resource type="ArrayMesh" uid="uid://c0voy5ldrpccx" path="res://models/door/door.res" id="8_85g3d"]
 
@@ -154,22 +154,6 @@ data = PackedVector3Array(-0.0001, -2.6633, -0.7061, 0.4992, 2.6632, -0.4996, -0
 material = ExtResource("3_85g3d")
 size = Vector3(12, 0.05, 7.5)
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_85g3d"]
-friction = 0.0
-bounce = 132.65
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_85g3d"]
-points = PackedVector3Array(-0.09031069, 2.7739556, -1.3390107, -0.250703, 0.69430304, -1.4995769, -0.250703, 0.69430304, 0.22284359, 1.5268223, 0.8876999, 0.008450568, 1.2717606, -0.579365, -1.4015591, -0.047740214, -0.5715502, 0.121162556, -0.27582413, 2.5607402, 0.195738, 1.3111567, 0.8876999, -1.5548556, 1.2651896, -0.563188, 0.11724285, -0.056141995, -0.59223473, -1.4075918, 1.2571507, 0.8876999, 0.27812225, -0.09031069, 2.7739556, 0.062456667, -0.26677498, 2.493253, -1.5156505, 1.5268223, 0.8876999, -1.2850046, -0.09031069, 2.5041046, 0.27812225, -0.09031069, 2.5578046, -1.5548556, 1.3120973, -0.5558233, 0.013491914, 0.0046971035, -0.566983, -1.4461691, -0.2780486, 2.7213807, -1.3176583, -0.09071, -0.5542044, 0.062849686, 1.1705229, -0.5814083, -1.4533811, 1.3147185, -0.5618175, -1.2924929, -0.093403056, -0.56036156, -1.3422766, 1.364804, 0.8876999, 0.22411615, -0.09031069, 2.7199178, -1.4470229, -0.2740655, 2.7138824, 0.03805265, 1.4728162, 0.8876999, -1.3930168, 1.4728162, 0.8876999, 0.11628336, -0.09031069, 2.61218, 0.22411615, -0.25924325, 2.4298894, 0.23138466, -0.09031069, 2.6655421, -1.5008495, -0.27108824, 2.6039915, -1.4680141)
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_choun"]
-points = PackedVector3Array(-0.09031069, 2.7739556, -1.3390107, -0.250703, 0.69430304, -1.4995769, -0.250703, 0.69430304, 0.22284359, 1.5268223, 0.8876999, 0.008450568, 1.2717606, -0.579365, -1.4015591, -0.047740214, -0.5715502, 0.121162556, -0.27582413, 2.5607402, 0.195738, 1.3111567, 0.8876999, -1.5548556, 1.2651896, -0.563188, 0.11724285, -0.056141995, -0.59223473, -1.4075918, 1.2571507, 0.8876999, 0.27812225, -0.09031069, 2.7739556, 0.062456667, -0.26677498, 2.493253, -1.5156505, 1.5268223, 0.8876999, -1.2850046, -0.09031069, 2.5041046, 0.27812225, -0.09031069, 2.5578046, -1.5548556, 1.3120973, -0.5558233, 0.013491914, 0.0046971035, -0.566983, -1.4461691, -0.2780486, 2.7213807, -1.3176583, -0.09071, -0.5542044, 0.062849686, 1.1705229, -0.5814083, -1.4533811, 1.3147185, -0.5618175, -1.2924929, -0.093403056, -0.56036156, -1.3422766, 1.364804, 0.8876999, 0.22411615, -0.09031069, 2.7199178, -1.4470229, -0.2740655, 2.7138824, 0.03805265, 1.4728162, 0.8876999, -1.3930168, 1.4728162, 0.8876999, 0.11628336, -0.09031069, 2.61218, 0.22411615, -0.25924325, 2.4298894, 0.23138466, -0.09031069, 2.6655421, -1.5008495, -0.27108824, 2.6039915, -1.4680141)
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ya4ey"]
-points = PackedVector3Array(-0.09031069, 2.7739556, -1.3390107, -0.250703, 0.69430304, -1.4995769, -0.250703, 0.69430304, 0.22284359, 1.5268223, 0.8876999, 0.008450568, 1.2717606, -0.579365, -1.4015591, -0.047740214, -0.5715502, 0.121162556, -0.27582413, 2.5607402, 0.195738, 0.636, 0.888, -1.555, 1.2651896, -0.563188, 0.11724285, -0.056141995, -0.59223473, -1.4075918, 1.2571507, 0.8876999, 0.27812225, -0.09031069, 2.7739556, 0.062456667, -0.26677498, 2.493253, -1.5156505, 1.5268223, 0.8876999, -1.2850046, -0.09031069, 2.5041046, 0.27812225, -0.09031069, 2.5578046, -1.5548556, 1.3120973, -0.5558233, 0.013491914, 0.0046971035, -0.566983, -1.4461691, -0.2780486, 2.7213807, -1.3176583, -0.09071, -0.5542044, 0.062849686, 1.1705229, -0.5814083, -1.4533811, 1.3147185, -0.5618175, -1.2924929, -0.093403056, -0.56036156, -1.3422766, 1.364804, 0.8876999, 0.22411615, -0.09031069, 2.7199178, -1.4470229, -0.2740655, 2.7138824, 0.03805265, 1.4728162, 0.8876999, -1.3930168, 1.4728162, 0.8876999, 0.11628336, -0.09031069, 2.61218, 0.22411615, -0.25924325, 2.4298894, 0.23138466, -0.09031069, 2.6655421, -1.5008495, -0.27108824, 2.6039915, -1.4680141)
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_eb6dy"]
-points = PackedVector3Array(-0.27921742, 0.7708495, -1.5279231, -0.2733548, 0.7332819, -1.5279231, -0.10333833, -0.64940375, -1.2930728, -0.27921742, 0.7708495, 0.2336266, -0.27921742, 2.4158432, -1.5279231, -0.25611174, 0.6993714, -1.5279231, 0.061160326, -0.64940375, -1.4575715, -0.0017767847, -0.64940375, -1.4449841, -0.05505781, -0.64940375, -1.4092909, -0.09075092, -0.64940375, -1.35601, -0.10333833, -0.64940375, -1.66893e-05, -0.2733548, 0.7332819, 0.2336266, -0.27921742, 2.4158432, 0.2336266, -0.27921742, 2.5179071, -1.5118871, -0.11230472, 2.4158432, -1.5279231, -0.22904015, 0.6724425, -1.5279231, -0.19507134, 0.65515476, -1.5279231, -0.1574815, 0.64917046, -1.5279231, 1.1502311, -0.64940375, -1.4575715, -0.09075092, -0.64940375, 0.06292045, -0.25611174, 0.6993714, 0.2336266, -0.05505781, -0.64940375, 0.11620152, -0.0017767847, -0.64940375, 0.15189457, 0.061160326, -0.64940375, 0.164482, -0.11230472, 2.4158432, 0.2336266, -0.27921742, 2.5179071, 0.2174182, -0.27921742, 2.61033, -1.4648136, -0.11230472, 2.5179071, -1.5118871, 1.2535172, 0.83501357, -1.5118871, 1.1512659, 0.83501357, -1.5279231, 1.1512659, 0.64917046, -1.5279231, 1.2131684, -0.64940375, -1.4449841, 1.2535172, 0.64917046, -1.5118871, -0.22904015, 0.6724425, 0.2336266, 1.1502311, -0.64940375, 0.164482, -0.1574815, 0.64917046, 0.2336266, -0.19507134, 0.65515476, 0.2336266, -0.11230472, 2.5179071, 0.2174182, 1.1512659, 0.83501357, 0.2336266, 1.2535172, 0.83501357, 0.2174182, -0.27921742, 2.61033, 0.17034459, -0.27921742, 2.6834705, -1.3915306, -0.11230472, 2.61033, -1.4648136, 1.3457673, 0.83501357, -1.4648136, 1.2664495, -0.64940375, -1.4092909, 1.3457673, 0.64917046, -1.4648136, 1.2131684, -0.64940375, 0.15189457, 1.2535172, 0.64917046, 0.2174182, 1.1512659, 0.64917046, 0.2336266, 1.3457673, 0.83501357, 0.17034459, -0.11230472, 2.61033, 0.17034459, -0.27921742, 2.6834705, 0.097061634, -0.27921742, 2.7306793, -1.2992803, -0.11230472, 2.6834705, -1.3915306, 1.4190502, 0.83501357, -1.3915306, 1.3021424, -0.64940375, -1.35601, 1.4190502, 0.64917046, -1.3915306, 1.2664495, -0.64940375, 0.11620152, 1.3457673, 0.64917046, 0.17034459, 1.4190502, 0.83501357, 0.097061634, -0.11230472, 2.6834705, 0.097061634, -0.27921742, 2.7306793, 0.004811406, -0.27921742, 2.7469697, -1.197029, -0.11230472, 2.7306793, -1.2992803, 1.4661238, 0.83501357, -1.2992803, 1.3147299, -0.64940375, -1.2930728, 1.4661238, 0.64917046, -1.2992803, 1.3021424, -0.64940375, 0.06292045, 1.4190502, 0.64917046, 0.097061634, 1.4661238, 0.83501357, 0.004811406, -0.11230472, 2.7306793, 0.004811406, -0.27921742, 2.7469697, -0.097439885, -0.11230472, 2.7469697, -1.197029, 1.4823322, 0.83501357, -1.197029, 1.3147299, -0.64940375, -1.66893e-05, 1.4823322, 0.64917046, -1.197029, 1.4661238, 0.64917046, 0.004811406, 1.4823322, 0.83501357, -0.097439885, -0.11230472, 2.7469697, -0.097439885, 1.4823322, 0.64917046, -0.097439885)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_85g3d"]
 size = Vector3(1.9919434, 1.960144, 5.6191406)
 
@@ -225,70 +209,6 @@ shape = SubResource("ConcavePolygonShape3D_tbgi4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5175595, 0.02513647, 3.7029614)
 mesh = SubResource("BoxMesh_tefeu")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="House/FirstFloor/DiningRoom" unique_id=1157418946]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8844547, 0.44811487, 1.6195943)
-collision_mask = 3
-mass = 3.0
-physics_material_override = SubResource("PhysicsMaterial_85g3d")
-linear_damp = 0.5
-
-[node name="Chair1" type="MeshInstance3D" parent="House/FirstFloor/DiningRoom/RigidBody3D" unique_id=998576596]
-transform = Transform3D(0.17672108, 0, -0.4677282, 0, 0.5, 0, 0.4677282, 0, 0.17672108, 0, 0, 0)
-mesh = ExtResource("5_o6xl0")
-
-[node name="Collision1" type="CollisionShape3D" parent="House/FirstFloor/DiningRoom/RigidBody3D" unique_id=1750654921]
-transform = Transform3D(0.17672108, 0, -0.4677282, 0, 0.5, 0, 0.4677282, 0, 0.17672108, 0, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_85g3d")
-
-[node name="RigidBody3D2" type="RigidBody3D" parent="House/FirstFloor/DiningRoom" unique_id=1422577193]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.3561897, 0.5465206, 1.4674796)
-collision_mask = 3
-mass = 3.0
-physics_material_override = SubResource("PhysicsMaterial_85g3d")
-linear_damp = 0.5
-
-[node name="Chair2" type="MeshInstance3D" parent="House/FirstFloor/DiningRoom/RigidBody3D2" unique_id=1474662813]
-transform = Transform3D(-0.06401701, 0, -0.49588493, 0, 0.5, 0, 0.49588493, 0, -0.06401701, 0, 0, 0)
-mesh = ExtResource("5_o6xl0")
-
-[node name="Collision2" type="CollisionShape3D" parent="House/FirstFloor/DiningRoom/RigidBody3D2" unique_id=434452862]
-transform = Transform3D(-0.06401701, 0, -0.49588493, 0, 0.5, 0, 0.49588493, 0, -0.06401701, 0, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_choun")
-
-[node name="RigidBody3D3" type="RigidBody3D" parent="House/FirstFloor/DiningRoom" unique_id=399482218]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5268831, 0.36690044, 5.56698)
-collision_mask = 3
-mass = 3.0
-physics_material_override = SubResource("PhysicsMaterial_85g3d")
-linear_damp = 0.5
-
-[node name="Chair3" type="MeshInstance3D" parent="House/FirstFloor/DiningRoom/RigidBody3D3" unique_id=96538556]
-transform = Transform3D(0.08509622, 0, 0.49270543, 0, 0.5, 0, -0.49270543, 0, 0.08509622, 0, 0, 0)
-mesh = ExtResource("5_o6xl0")
-
-[node name="Collision3" type="CollisionShape3D" parent="House/FirstFloor/DiningRoom/RigidBody3D3" unique_id=1711464658]
-transform = Transform3D(0.08509622, 0, 0.49270543, 0, 0.5, 0, -0.49270543, 0, 0.08509622, 0, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_ya4ey")
-
-[node name="RigidBody3D4" type="RigidBody3D" parent="House/FirstFloor/DiningRoom" unique_id=247194019]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.842071, 1.4900346, 6.1843452)
-collision_mask = 3
-mass = 3.0
-physics_material_override = SubResource("PhysicsMaterial_85g3d")
-linear_damp = 0.5
-
-[node name="Chair4" type="MeshInstance3D" parent="House/FirstFloor/DiningRoom/RigidBody3D4" unique_id=1536571368]
-transform = Transform3D(0.16664846, 0, 0.471411, 0, 0.5, 0, -0.471411, 0, 0.16664846, 0, 0, 0)
-mesh = ExtResource("5_o6xl0")
-
-[node name="Collision4" type="CollisionShape3D" parent="House/FirstFloor/DiningRoom/RigidBody3D4" unique_id=633765200]
-transform = Transform3D(0.16664846, 0, 0.471411, 0, 0.5, 0, -0.471411, 0, 0.16664846, 0, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_eb6dy")
-
-[node name="Chairs" type="StaticBody3D" parent="House/FirstFloor/DiningRoom" unique_id=1685042765]
-collision_layer = 2
-collision_mask = 0
-
 [node name="Couch" type="StaticBody3D" parent="House/FirstFloor/DiningRoom" unique_id=2021377746]
 transform = Transform3D(-0.7, 0, 1.2834644e-07, 0, 0.7, 0, -1.0569706e-07, 0, -0.85, 0.6986625, 0.6401098, -4.6576414)
 collision_layer = 2
@@ -301,6 +221,20 @@ mesh = ExtResource("5_choun")
 [node name="Collision" type="CollisionShape3D" parent="House/FirstFloor/DiningRoom/Couch" unique_id=2124228293]
 transform = Transform3D(1.0000001, 0, -1.2789769e-13, 0, 1.0000001, 0, 0, 0, 0.99999976, 0, 0.058502138, 0)
 shape = SubResource("BoxShape3D_85g3d")
+
+[node name="Chairs" type="Node3D" parent="House/FirstFloor/DiningRoom" unique_id=483417989]
+
+[node name="Chair" parent="House/FirstFloor/DiningRoom/Chairs" unique_id=2019198674 instance=ExtResource("6_choun")]
+transform = Transform3D(0.31046447, 0, -0.39193344, 0, 0.5, 0, 0.39193344, 0, 0.31046447, 2.442305, 0.32470092, 2.0904527)
+
+[node name="Chair2" parent="House/FirstFloor/DiningRoom/Chairs" unique_id=1265436893 instance=ExtResource("6_choun")]
+transform = Transform3D(-0.029191464, 0, -0.49914715, 0, 0.5, 0, 0.49914715, 0, -0.029191464, 5.226911, 0.32470068, 2.001551)
+
+[node name="Chair3" parent="House/FirstFloor/DiningRoom/Chairs" unique_id=130313990 instance=ExtResource("6_choun")]
+transform = Transform3D(-0.13722306, 0, 0.48080122, 0, 0.5, 0, -0.48080122, 0, -0.13722306, 6.2116294, 0.32470092, 5.5020165)
+
+[node name="Chair4" parent="House/FirstFloor/DiningRoom/Chairs" unique_id=409114444 instance=ExtResource("6_choun")]
+transform = Transform3D(0.04568991, 0, 0.49790806, 0, 0.5, 0, -0.49790806, 0, 0.04568991, 3.2255855, 0.32470092, 5.1388574)
 
 [node name="Entrance" type="Node3D" parent="House/FirstFloor" unique_id=1487019454]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.106101, 0, -8.351756)

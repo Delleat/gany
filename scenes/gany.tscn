@@ -51,3 +51,8 @@ debug_shape_thickness = 4
 transform = Transform3D(-1, -8.742278e-08, 3.821371e-15, 0, -4.371139e-08, -1, 8.742278e-08, -1, 4.371139e-08, 0, -1, -1)
 shape = SubResource("SeparationRayShape3D_42se6")
 collision_mask = 3
+
+[node name="DbgInfo" type="Label3D" parent="." unique_id=163406283]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2775095, 0)
+visible = false
+billboard = 2

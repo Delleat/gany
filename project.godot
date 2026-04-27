@@ -99,6 +99,7 @@ sensors/canvas_textures/default_texture_filter=2
 3d_physics/layer_2="env"
 3d_physics/layer_3="enemies"
 3d_physics/layer_4="interact"
+3d_physics/layer_5="pushable"
 
 [physics]
 
@@ -110,7 +111,6 @@ common/physics_interpolation=true
 
 textures/canvas_textures/default_texture_filter=2
 rendering_device/driver.windows="d3d12"
-scaling_3d/mode=2
 scaling_3d/fsr_sharpness=0.5
 anti_aliasing/quality/use_taa=true
 anti_aliasing/vsync/vsync_mode=0

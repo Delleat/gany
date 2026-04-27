@@ -6,12 +6,17 @@ extends CharacterBody3D
 @export var view_angle := 160.0
 @export var idle_time := 3.0
 @export var rotation_speed := 10.0
+@export var is_sound_sensitive := true
 
 @onready var agent := $NavAgent
 @onready var sight := $Eyes
+@onready var dbg_info := $DbgInfo
 @onready var v_a := cos(deg_to_rad(view_angle / 2.0))
 @onready var idle_time_left := 0.0000001
 
+enum States { Idle, Searching, Chasing }
+
+var state := States.Idle
 var current_speed := walk_speed
 var hot_spots: Array[Vector3] = []
 
@@ -20,27 +25,30 @@ func start() -> void:
 	agent.navigation_finished.connect(Callable(_on_navigation_finished))
 
 func update(delta: float, player_pos: Vector3):
+	# Looking for player
 	sight.look_at(player_pos)
 	
 	var dir = (player_pos - global_position).normalized()
 	
+	# Checks if what sees is a player
 	var what_sees = sight.get_collider()
 	if what_sees and what_sees.global_position == player_pos and -global_basis.z.dot(dir) > v_a:
 		idle_time_left = 0.0
 		current_speed = run_speed
 		go_to(what_sees.position)
 	
+	# Idle stuff
 	if idle_time_left > 0.0 and agent.is_navigation_finished():
 		idle_time_left -= delta
 		if idle_time_left <= 0.0:
 			go_to(hot_spots.pick_random())
 		return
 	
+	# idk some check
 	if NavigationServer3D.map_get_iteration_id(agent.get_navigation_map()) == 0:
 		return
-	if agent.is_navigation_finished():
-		return
 	
+	# Calculates path
 	var dest: Vector3 = agent.get_next_path_position()
 	var new_velocity: Vector3 = global_position.direction_to(dest) * current_speed
 	if agent.avoidance_enabled:
@@ -55,6 +63,9 @@ func update(delta: float, player_pos: Vector3):
 
 func go_to(pos: Vector3):
 	agent.set_target_position(pos)
+
+func debug():
+	dbg_info.text = "State: " + str(state)
 
 func _on_velocity_computed(safe_velocity: Vector3):
 	velocity = safe_velocity
