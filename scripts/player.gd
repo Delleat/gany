@@ -239,7 +239,7 @@ func push_rigid_bodies():
 		
 		if body is RigidBody3D:
 			# Disable stair collisions
-			disable_stair_collision(true)
+			enable_stair_collision(false)
 			
 			# Skip heavy objects
 			if body.mass >= 30 or body.freeze:
@@ -269,10 +269,10 @@ func push_rigid_bodies():
 			body.apply_impulse(impulse, impulse_point)
 		else:
 			# Enable (broken) stair collisions
-			disable_stair_collision(false)
+			enable_stair_collision(true)
 
-func disable_stair_collision(to: bool):
-		$StairCheckF.disabled = to
-		$StairCheckB.disabled = to
-		$StairCheckL.disabled = to
-		$StairCheckR.disabled = to
+func enable_stair_collision(to: bool):
+		$StairCheckF.disabled = !to
+		$StairCheckB.disabled = !to
+		$StairCheckL.disabled = !to
+		$StairCheckR.disabled = !to

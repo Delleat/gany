@@ -519,6 +519,7 @@ TextEdit/colors/search_result_color = Color(0, 0, 0, 1)
 TextEdit/colors/selection_color = Color(1, 1, 1, 1)
 TextEdit/colors/word_highlighted_color = Color(1, 1, 1, 1)
 TextEdit/styles/normal = SubResource("StyleBoxFlat_copic")
+VBoxContainer/constants/separation = 12
 VScrollBar/styles/grabber = SubResource("StyleBoxFlat_r8i6f")
 VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_nbki4")
 VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_5tjn0")
