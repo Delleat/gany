@@ -33,4 +33,4 @@ func _on_custom_btn_pressed() -> void:
 func _on_play_btn_pressed() -> void:
 	SettingsData.difficulty = diff
 	
-	get_tree().change_scene_to_file("res://scenes/tet.tscn")
+	get_tree().change_scene_to_file("res://scenes/m_loading.tscn")

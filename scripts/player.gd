@@ -36,7 +36,8 @@ signal item_dropped(Item)
 @onready var item_pos: Node3D = $ItemPivot/ItemPos
 @onready var item_camera: Camera3D = $CameraPivot/Camera/SubViewportContainer/SubViewport/ItemCamera
 @onready var fleshlight: SpotLight3D = $ItemPivot/Fleshlight/SpotLight
-@onready var throw_ray: RayCast3D= $ItemPivot/ItemPos/ThrowRay
+@onready var throw_ray: RayCast3D = $ItemPivot/ItemPos/ThrowRay
+@onready var sub_viewport: SubViewport = $CameraPivot/Camera/SubViewportContainer/SubViewport
 
 enum State { Walking, Crouching, Running }
 

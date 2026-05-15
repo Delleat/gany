@@ -12,55 +12,86 @@ albedo_color = Color(0, 0, 0, 1)
 metallic_specular = 1.0
 roughness = 0.65
 
-[sub_resource type="Environment" id="Environment_mkhta"]
-tonemap_mode = 3
-ssao_enabled = true
-ssao_radius = 25.55
-ssao_detail = 2.2
-ssao_sharpness = 0.93
-ssao_light_affect = 0.3
-ssao_ao_channel_affect = 0.25
-ssil_enabled = true
-ssil_radius = 8.6
-ssil_intensity = 16.25
-ssil_sharpness = 1.0
-sdfgi_enabled = true
-sdfgi_use_occlusion = true
+[sub_resource type="Animation" id="Animation_jru4g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Latarken:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mdquf"]
+_data = {
+&"RESET": SubResource("Animation_jru4g")
+}
+
+[sub_resource type="Animation" id="Animation_npwpw"]
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Latarken:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.13962634, 0, 0), Vector3(0.13962634, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jru4g"]
+_data = {
+&"xamp": SubResource("Animation_npwpw")
+}
 
 [node name="MMenu" type="Node3D" unique_id=766150803]
 script = ExtResource("1_yvnh4")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=668210798]
-transform = Transform3D(-1.7178574e-07, 0, 3.9299996, 0, 3.9299998, 0, -3.9299996, 0, -1.7178574e-07, -0.9619771, -0.001373291, -4.6237936)
-size = Vector3(6.962617, 0.024, 3.781948)
+[node name="Flur" type="CSGBox3D" parent="." unique_id=668210798]
+transform = Transform3D(-1.7178574e-07, 0, 3.9299996, 0, 3.9299998, 0, -3.9299996, 0, -1.7178574e-07, 1.3491186, -0.001373291, -4.6237936)
+size = Vector3(6.962617, 0.024, 2.6058178)
 material = SubResource("StandardMaterial3D_jru4g")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=620046005]
+[node name="Wol" type="CSGBox3D" parent="." unique_id=620046005]
 transform = Transform3D(-1.7178574e-07, 3.9299996, -1.7178574e-07, 0, -1.7178574e-07, -3.9299998, -3.9299996, -1.7178574e-07, 7.508994e-15, -2.8522053, 3.7480528, -3.533204)
 size = Vector3(7.7576146, 0.024, 2.552572)
 material = SubResource("StandardMaterial3D_jru4g")
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=840453003]
+[node name="Camera" type="Camera3D" parent="." unique_id=840453003]
 transform = Transform3D(0.18223552, -0.13004175, 0.97461754, 0, 0.9912155, 0.13225639, -0.9832549, -0.024101812, 0.18063468, 6.455, 3.085, 1.362)
-environment = SubResource("Environment_mkhta")
 fov = 55.0
 far = 55.54
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2006028235]
-transform = Transform3D(0.1376006, -0.025808426, 0, 0.025808426, 0.1376006, 0, 0, 0, 0.13999999, 0, 4.8035054, 0.113459766)
-mesh = ExtResource("1_henk5")
-
-[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=634819967]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 4.8605413, 0.11319423)
-light_energy = 9.585
-light_indirect_energy = 1.41
-light_size = 9.48
-spot_range = 8.215
-spot_angle = 55.65
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=699625199]
+[node name="Couch" type="MeshInstance3D" parent="." unique_id=699625199]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.03854, 0)
 mesh = ExtResource("3_yvnh4")
+
+[node name="Latarken" type="Node3D" parent="." unique_id=6124917]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.884103, 0)
+
+[node name="Lamb" type="MeshInstance3D" parent="Latarken" unique_id=2006028235]
+transform = Transform3D(0.14, 0, 0, 0, 0.14, 0, 0, 0, 0.14, 0, -4.357794, 0)
+mesh = ExtResource("1_henk5")
+
+[node name="Lig" type="SpotLight3D" parent="Latarken" unique_id=634819967]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -4.690697, 0)
+light_energy = 16.0
+spot_range = 6.951
+spot_angle = 73.51
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=917756936]
+libraries/ = SubResource("AnimationLibrary_mdquf")
+libraries/menu = SubResource("AnimationLibrary_jru4g")
+autoplay = &"menu/xamp"
+speed_scale = 0.415
 
 [node name="Control" type="Control" parent="." unique_id=1271269567]
 layout_mode = 3
@@ -201,6 +232,54 @@ layout_mode = 2
 [node name="Vsync" type="CheckBox" parent="Control/Settings/HBoxContainer/Visuals" unique_id=2009593268]
 layout_mode = 2
 text = "Vsync"
+
+[node name="Res" type="HBoxContainer" parent="Control/Settings/HBoxContainer/Visuals" unique_id=1293493700]
+layout_mode = 2
+
+[node name="ResLb" type="Label" parent="Control/Settings/HBoxContainer/Visuals/Res" unique_id=1916474865]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "RESOlution      "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResBox" type="OptionButton" parent="Control/Settings/HBoxContainer/Visuals/Res" unique_id=708318384]
+layout_mode = 2
+selected = 3
+item_count = 6
+popup/item_0/text = "373x37"
+popup/item_0/id = 4
+popup/item_1/text = "123x69"
+popup/item_1/id = 0
+popup/item_2/text = "1280x720"
+popup/item_2/id = 1
+popup/item_3/text = "1366x768"
+popup/item_3/id = 2
+popup/item_4/text = "1920x1080"
+popup/item_4/id = 3
+popup/item_5/text = "2560x1440"
+popup/item_5/id = 5
+
+[node name="WindowMode" type="HBoxContainer" parent="Control/Settings/HBoxContainer/Visuals" unique_id=1156423441]
+layout_mode = 2
+
+[node name="WMLb" type="Label" parent="Control/Settings/HBoxContainer/Visuals/WindowMode" unique_id=1069726499]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Window mode"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WMBox" type="OptionButton" parent="Control/Settings/HBoxContainer/Visuals/WindowMode" unique_id=1028269504]
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Fullscreen"
+popup/item_0/id = 0
+popup/item_1/text = "Windowed"
+popup/item_1/id = 1
+popup/item_2/text = "Exclusive"
+popup/item_2/id = 2
 
 [node name="Back" type="Button" parent="Control/Settings" unique_id=1588488634]
 layout_mode = 1
@@ -356,6 +435,8 @@ metadata/_edit_use_anchors_ = true
 [connection signal="toggled" from="Control/Settings/HBoxContainer/Movement/CrouchToggle" to="Control/Settings" method="_on_crouch_toggle_toggled"]
 [connection signal="toggled" from="Control/Settings/HBoxContainer/Movement/CameraSmoothing" to="Control/Settings" method="_on_camera_smoothing_toggled"]
 [connection signal="toggled" from="Control/Settings/HBoxContainer/Visuals/Vsync" to="Control/Settings" method="_on_vsync_toggled"]
+[connection signal="item_selected" from="Control/Settings/HBoxContainer/Visuals/Res/ResBox" to="Control/Settings" method="_on_res_box_item_selected"]
+[connection signal="item_selected" from="Control/Settings/HBoxContainer/Visuals/WindowMode/WMBox" to="Control/Settings" method="_on_wm_box_item_selected"]
 [connection signal="pressed" from="Control/Settings/Back" to="." method="_on_settings_back"]
 [connection signal="pressed" from="Control/Config/Menu/DifficultyBox/EasyBtn" to="Control/Config" method="_on_easy_btn_pressed"]
 [connection signal="pressed" from="Control/Config/Menu/DifficultyBox/MediumBtn" to="Control/Config" method="_on_medium_btn_pressed"]

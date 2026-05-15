@@ -17,6 +17,10 @@ func _ready() -> void:
 	player.sprint_is_toggle = SettingsData.toggle_sprint
 	player.camera_smoothing = SettingsData.camera_smoothing
 	
+	var rex = SettingsData.screen_res
+	player.sub_viewport.size = rex
+	DisplayServer.window_set_size(rex)
+	
 	for spot in hotspots.get_children():
 		hot_spots.append(spot.position)
 	

@@ -6,6 +6,7 @@ extends Interactable
 
 func _ready() -> void:
 	prompt_message = item_name + "\n" + "Pick Up"
+	#push_error("Spierdalaj na smietnik")
 	connect("interacted", _on_interacted)
 
 func _on_interacted(player: Node):
