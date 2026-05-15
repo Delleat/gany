@@ -215,6 +215,8 @@ func interacted(item: Item):
 	var mesh: MeshInstance3D = item.get_node("Mesh")
 	mesh.set_layer_mask_value(1, false)
 	mesh.set_layer_mask_value(2, true)
+	
+	mesh.get_active_material(0).next_pass = null
 
 func throw_item():
 	if not held_item: return
@@ -229,6 +231,8 @@ func throw_item():
 	mesh.set_layer_mask_value(1, true)
 	mesh.set_layer_mask_value(2, false)
 	
+	mesh.get_active_material(0).next_pass = highlight_shader
+	
 	item_to_throw.global_position = pivot.global_position
 	if !throw_ray.is_colliding():
 		item_to_throw.apply_central_impulse(-pivot.global_basis.z * throw_force)
@@ -239,37 +243,29 @@ func push_rigid_bodies():
 		var body := collision.get_collider()
 		
 		if body is RigidBody3D:
-			# Disable stair collisions
 			enable_stair_collision(false)
 			
-			# Skip heavy objects
 			if body.mass >= 30 or body.freeze:
 				continue
 			
-			# 1. Get the global contact point
 			var push_point := collision.get_position()
 			
-			# 2. Calculate direction (away from the player)
 			var push_dir := -collision.get_normal()
 			
-			# Add a slight upward lift to prevent sticking to the floor
 			#push_dir.y = 0.0002
 			push_dir = push_dir.normalized()
 			
-			# 3. Calculate Impulse
 			var speed = velocity.length()
 			var min_force = 1.0
-			var max_force = 5.0 # Cap the force so it doesn't explode
+			var max_force = 5.0
 			var force = clamp(speed, min_force, max_force)
 			
-			# Reduce the mass influence
 			var impulse = push_dir * force / (body.mass / 2.0)
 			
 			var impulse_point = push_point - body.global_position
 			impulse_point.y = cam.global_position.y
 			body.apply_impulse(impulse, impulse_point)
 		else:
-			# Enable (broken) stair collisions
 			enable_stair_collision(true)
 
 func enable_stair_collision(to: bool):
