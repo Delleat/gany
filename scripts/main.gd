@@ -26,7 +26,7 @@ func _ready() -> void:
 		if debug:
 			enemy.dbg_info.visible = true
 	
-	player.connect("item_dropped", _item_dropped)
+	player.interactor.connect("item_dropped", _item_dropped)
 
 func _physics_process(delta: float) -> void:
 	for enemy in enemies.get_children():

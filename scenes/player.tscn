@@ -1,24 +1,12 @@
 [gd_scene format=3 uid="uid://hmg05712b413"]
 
 [ext_resource type="Script" uid="uid://b80kmh14qra0g" path="res://scripts/player.gd" id="1_3vyb7"]
-[ext_resource type="Shader" uid="uid://472vwpmd1gky" path="res://shaders/highlight.gdshader" id="2_dqkch"]
 [ext_resource type="PackedScene" uid="uid://c6rbe48b3hp0n" path="res://addons/interact/interact_ray.tscn" id="2_qhqgy"]
 [ext_resource type="Theme" uid="uid://rxccg77x7mel" path="res://other/hud_theme.tres" id="3_dqkch"]
 [ext_resource type="ArrayMesh" uid="uid://c72tyum3o0tha" path="res://models/fleshlight/fleshlight.res" id="3_qlg0r"]
+[ext_resource type="Script" uid="uid://fd64snh7n6i5" path="res://scripts/controllers/interaction_controller.gd" id="3_smehm"]
 [ext_resource type="Script" uid="uid://1kad862bp5s5" path="res://scripts/controllers/camera_controller.gd" id="4_fjrip"]
 [ext_resource type="PackedScene" uid="uid://gvc8usnb0lbv" path="res://scenes/pause_menu.tscn" id="6_tuyoq"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qlg0r"]
-render_priority = 0
-shader = ExtResource("2_dqkch")
-shader_parameter/shine_color = Color(1, 1, 1, 1)
-shader_parameter/shine_speed = 1.0
-shader_parameter/shine_width = 1.0
-shader_parameter/cycle_interval = 1.0
-shader_parameter/angle_fade = 1.0
-shader_parameter/x_direction = 0.0
-shader_parameter/y_direction = 0.0
-shader_parameter/z_direction = 1.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u8vuu"]
 
@@ -37,7 +25,9 @@ length = 0.72
 process_mode = 3
 collision_mask = 18
 script = ExtResource("1_3vyb7")
-highlight_shader = SubResource("ShaderMaterial_qlg0r")
+
+[node name="Interactor" type="Node3D" parent="." unique_id=1811408054]
+script = ExtResource("3_smehm")
 
 [node name="Collision" type="CollisionShape3D" parent="." unique_id=626956233]
 shape = SubResource("CapsuleShape3D_u8vuu")
