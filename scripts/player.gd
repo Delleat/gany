@@ -62,6 +62,10 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	current_stamina = max_stamina
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		pause_menu.toggle()
+
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		if grabbed_door:
@@ -72,6 +76,8 @@ func _unhandled_input(event):
 			target_rotation_y -= event.relative.x * mouse_sensitivity
 
 func _physics_process(delta: float):
+	if get_tree().paused:
+		return
 	if camera_smoothing:
 		pivot.rotation.x = lerp_angle(pivot.rotation.x, target_rotation_x, delta * smoothing_amount)
 		pivot.rotation.y = lerp_angle(pivot.rotation.y, target_rotation_y, delta * smoothing_amount)
@@ -94,9 +100,6 @@ func _physics_process(delta: float):
 	
 	if Input.is_action_just_pressed("fleshlight"):
 		fleshlight.visible = !fleshlight.visible
-	
-	if Input.is_action_just_pressed("ui_cancel"):
-		pause_menu.toggle()
 	
 	if held_item and Input.is_action_just_pressed("Never gonna give you upNever gonna let you downNever gonna run around and desert youNever gonna make you cryNever gonna say goodbyeNever gonna tell a lie and hurt you"):
 		throw_item()

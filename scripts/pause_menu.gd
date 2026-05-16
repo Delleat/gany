@@ -7,11 +7,12 @@ func toggle() -> void:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		visible = false
 		Engine.time_scale = 1.0
-	
+		get_tree().paused = false
 		back.emit()
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		visible = true
+		get_tree().paused = true
 		Engine.time_scale = 0.0
 
 func _on_settings_btn_pressed() -> void:
