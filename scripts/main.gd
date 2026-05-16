@@ -12,13 +12,9 @@ var items_to_inspect: Dictionary[Item, float] = {}
 var hot_spots: Array[Vector3] = []
 
 func _ready() -> void:
-	player.crouch_is_toggle = SettingsData.toggle_crouch
-	player.sprint_is_toggle = SettingsData.toggle_sprint
-	player.camera_smoothing = SettingsData.camera_smoothing
-	
-	var rex = SettingsData.screen_res
-	player.sub_viewport.size = rex
-	DisplayServer.window_set_size(rex)
+	SettingsData.apply_vis_settings()
+	apply_player_settings()
+	player.sub_viewport.set_size(SettingsData.screen_res)
 	
 	for spot in hotspots.get_children():
 		hot_spots.append(spot.position)
@@ -54,3 +50,8 @@ func _item_dropped(item: Item):
 	await get_tree().create_timer(0.05).timeout
 	
 	items_to_inspect.set(item, item.position.y)
+
+func apply_player_settings() -> void:
+	player.crouch_is_toggle = SettingsData.toggle_crouch
+	player.sprint_is_toggle = SettingsData.toggle_sprint
+	player.camera_smoothing = SettingsData.camera_smoothing

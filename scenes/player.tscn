@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c6rbe48b3hp0n" path="res://addons/interact/interact_ray.tscn" id="2_qhqgy"]
 [ext_resource type="Theme" uid="uid://rxccg77x7mel" path="res://other/hud_theme.tres" id="3_dqkch"]
 [ext_resource type="ArrayMesh" uid="uid://c72tyum3o0tha" path="res://models/fleshlight/fleshlight.res" id="3_qlg0r"]
+[ext_resource type="PackedScene" uid="uid://gvc8usnb0lbv" path="res://scenes/pause_menu.tscn" id="6_tuyoq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qlg0r"]
 render_priority = 0
@@ -149,6 +150,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
+[node name="PauseMenu" parent="." unique_id=162939457 instance=ExtResource("6_tuyoq")]
+visible = false
+
 [node name="StairCheckF" type="CollisionShape3D" parent="." unique_id=2030868919]
 transform = Transform3D(-1, 8.742278e-08, -3.821371e-15, 0, -4.371139e-08, -1, -8.742278e-08, -1, 4.371139e-08, -4.5951467e-08, -0.2813552, -0.52562344)
 shape = SubResource("SeparationRayShape3D_dqkch")
@@ -164,3 +168,5 @@ shape = SubResource("SeparationRayShape3D_dqkch")
 [node name="StairCheckR" type="CollisionShape3D" parent="." unique_id=969780291]
 transform = Transform3D(-1, 8.742278e-08, -3.821371e-15, 0, -4.371139e-08, -1, -8.742278e-08, -1, 4.371139e-08, 0.52, -0.281, 0)
 shape = SubResource("SeparationRayShape3D_dqkch")
+
+[connection signal="back" from="PauseMenu" to="." method="_on_pause_menu_back"]

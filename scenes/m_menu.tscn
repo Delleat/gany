@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://c7voqjil8ngmo" path="res://scripts/m_menu.gd" id="1_yvnh4"]
 [ext_resource type="Theme" uid="uid://3b6jfloh1m1l" path="res://other/ui_theme.tres" id="3_c7gyy"]
 [ext_resource type="ArrayMesh" uid="uid://dfra3fpldjnhw" path="res://models/couch/couch.res" id="3_yvnh4"]
-[ext_resource type="Script" uid="uid://dpv1fh6un2hkj" path="res://scripts/settings_menu.gd" id="5_uf733"]
+[ext_resource type="PackedScene" uid="uid://b1x3y1gw6igyl" path="res://scenes/settings.tscn" id="5_npwpw"]
 [ext_resource type="Script" uid="uid://ct2malh4kk8ju" path="res://scripts/config.gd" id="6_npwpw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jru4g"]
@@ -103,7 +103,6 @@ grow_vertical = 2
 theme = ExtResource("3_c7gyy")
 
 [node name="SelectMenu" type="VBoxContainer" parent="Control" unique_id=2079291466]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -134,190 +133,8 @@ layout_mode = 2
 theme = ExtResource("3_c7gyy")
 text = "Wypierdaja"
 
-[node name="Settings" type="Control" parent="Control" unique_id=210486082]
+[node name="Settings" parent="Control" unique_id=635073764 instance=ExtResource("5_npwpw")]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("5_uf733")
-
-[node name="Background" type="ColorRect" parent="Control/Settings" unique_id=380895344]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.69411767)
-
-[node name="SettingsLb" type="Label" parent="Control/Settings" unique_id=1204647499]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.38793054
-anchor_top = 0.040123455
-anchor_right = 0.6120694
-anchor_bottom = 0.13993827
-offset_left = 0.104003906
-offset_right = -0.104003906
-offset_bottom = 0.3199997
-grow_horizontal = 2
-text = "Settings"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/Settings" unique_id=1079637672]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.13823265
-anchor_top = 0.23751855
-anchor_right = 0.8617675
-anchor_bottom = 0.7624815
-offset_left = -0.24401855
-offset_top = 0.08798218
-offset_right = 0.24401855
-offset_bottom = -0.088012695
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="Movement" type="VBoxContainer" parent="Control/Settings/HBoxContainer" unique_id=1505730260]
-layout_mode = 2
-metadata/_edit_group_ = true
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="Control/Settings/HBoxContainer/Movement" unique_id=2085470305]
-layout_mode = 2
-text = "Movement"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="HSeparator" type="HSeparator" parent="Control/Settings/HBoxContainer/Movement" unique_id=1633104972]
-layout_mode = 2
-
-[node name="SprintToggle" type="CheckBox" parent="Control/Settings/HBoxContainer/Movement" unique_id=587938274]
-layout_mode = 2
-text = "Toggle sprint"
-
-[node name="CrouchToggle" type="CheckBox" parent="Control/Settings/HBoxContainer/Movement" unique_id=286264813]
-layout_mode = 2
-button_pressed = true
-text = "Toggle Crouch"
-
-[node name="CameraSmoothing" type="CheckBox" parent="Control/Settings/HBoxContainer/Movement" unique_id=1507129282]
-layout_mode = 2
-text = "Camera Smoothing"
-
-[node name="VSeparator" type="VSeparator" parent="Control/Settings/HBoxContainer" unique_id=1167033945]
-layout_mode = 2
-
-[node name="Visuals" type="VBoxContainer" parent="Control/Settings/HBoxContainer" unique_id=1351671253]
-layout_mode = 2
-metadata/_edit_group_ = true
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="Control/Settings/HBoxContainer/Visuals" unique_id=515861047]
-layout_mode = 2
-text = "Visuals"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="HSeparator" type="HSeparator" parent="Control/Settings/HBoxContainer/Visuals" unique_id=860621104]
-layout_mode = 2
-
-[node name="Vsync" type="HBoxContainer" parent="Control/Settings/HBoxContainer/Visuals" unique_id=1176280765]
-layout_mode = 2
-theme_override_constants/separation = 78
-alignment = 1
-
-[node name="VsyncLb" type="Label" parent="Control/Settings/HBoxContainer/Visuals/Vsync" unique_id=793056386]
-layout_mode = 2
-theme_override_font_sizes/font_size = 16
-text = "Vsync"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="VsyncBox" type="OptionButton" parent="Control/Settings/HBoxContainer/Visuals/Vsync" unique_id=545122909]
-layout_mode = 2
-selected = 0
-allow_reselect = true
-item_count = 3
-popup/item_0/text = "Disabled"
-popup/item_0/id = 0
-popup/item_1/text = "Enabled"
-popup/item_1/id = 1
-popup/item_2/text = "Adaptive"
-popup/item_2/id = 2
-
-[node name="Res" type="HBoxContainer" parent="Control/Settings/HBoxContainer/Visuals" unique_id=1293493700]
-layout_mode = 2
-theme_override_constants/separation = 41
-
-[node name="ResLb" type="Label" parent="Control/Settings/HBoxContainer/Visuals/Res" unique_id=1916474865]
-layout_mode = 2
-theme_override_font_sizes/font_size = 16
-text = "Resolution"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ResBox" type="OptionButton" parent="Control/Settings/HBoxContainer/Visuals/Res" unique_id=708318384]
-layout_mode = 2
-selected = 3
-allow_reselect = true
-item_count = 6
-popup/item_0/text = "373x37"
-popup/item_0/id = 4
-popup/item_1/text = "123x69"
-popup/item_1/id = 0
-popup/item_2/text = "1280x720"
-popup/item_2/id = 1
-popup/item_3/text = "1366x768"
-popup/item_3/id = 2
-popup/item_4/text = "1920x1080"
-popup/item_4/id = 3
-popup/item_5/text = "2560x1440"
-popup/item_5/id = 5
-
-[node name="WindowMode" type="HBoxContainer" parent="Control/Settings/HBoxContainer/Visuals" unique_id=1156423441]
-layout_mode = 2
-theme_override_constants/separation = 14
-
-[node name="WMLb" type="Label" parent="Control/Settings/HBoxContainer/Visuals/WindowMode" unique_id=1069726499]
-layout_mode = 2
-theme_override_font_sizes/font_size = 16
-text = "Window mode"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="WMBox" type="OptionButton" parent="Control/Settings/HBoxContainer/Visuals/WindowMode" unique_id=1028269504]
-layout_mode = 2
-selected = 1
-allow_reselect = true
-item_count = 3
-popup/item_0/text = "Windowed"
-popup/item_0/id = 0
-popup/item_1/text = "Fullscreen"
-popup/item_1/id = 3
-popup/item_2/text = "Exclusive"
-popup/item_2/id = 4
-
-[node name="Back" type="Button" parent="Control/Settings" unique_id=1588488634]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.9233125
-anchor_top = 0.94104934
-anchor_right = 1.0
-anchor_bottom = 1.0000001
-offset_left = 0.34399414
-offset_top = 0.2000122
-grow_horizontal = 0
-grow_vertical = 0
-text = "Back"
-metadata/_edit_use_anchors_ = true
 
 [node name="Config" type="Control" parent="Control" unique_id=1030901499]
 visible = false
@@ -455,13 +272,7 @@ metadata/_edit_use_anchors_ = true
 [connection signal="pressed" from="Control/SelectMenu/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Control/SelectMenu/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="Control/SelectMenu/Quit" to="." method="_on_quit_pressed"]
-[connection signal="toggled" from="Control/Settings/HBoxContainer/Movement/SprintToggle" to="Control/Settings" method="_on_sprint_toggle_toggled"]
-[connection signal="toggled" from="Control/Settings/HBoxContainer/Movement/CrouchToggle" to="Control/Settings" method="_on_crouch_toggle_toggled"]
-[connection signal="toggled" from="Control/Settings/HBoxContainer/Movement/CameraSmoothing" to="Control/Settings" method="_on_camera_smoothing_toggled"]
-[connection signal="item_selected" from="Control/Settings/HBoxContainer/Visuals/Vsync/VsyncBox" to="Control/Settings" method="_on_res_box_item_selected"]
-[connection signal="item_selected" from="Control/Settings/HBoxContainer/Visuals/Res/ResBox" to="Control/Settings" method="_on_res_box_item_selected"]
-[connection signal="item_selected" from="Control/Settings/HBoxContainer/Visuals/WindowMode/WMBox" to="Control/Settings" method="_on_wm_box_item_selected"]
-[connection signal="pressed" from="Control/Settings/Back" to="." method="_on_settings_back"]
+[connection signal="back" from="Control/Settings" to="." method="_on_settings_back"]
 [connection signal="pressed" from="Control/Config/Menu/DifficultyBox/EasyBtn" to="Control/Config" method="_on_easy_btn_pressed"]
 [connection signal="pressed" from="Control/Config/Menu/DifficultyBox/MediumBtn" to="Control/Config" method="_on_medium_btn_pressed"]
 [connection signal="pressed" from="Control/Config/Menu/DifficultyBox/HardBtn" to="Control/Config" method="_on_hard_btn_pressed"]

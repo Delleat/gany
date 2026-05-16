@@ -1,5 +1,7 @@
 extends Control
 
+signal back
+
 @onready var res_box = $HBoxContainer/Visuals/Res/ResBox
 
 func _ready() -> void:
@@ -33,7 +35,17 @@ func _on_res_box_item_selected(index: int) -> void:
 	assert(res_value, "Error: No metadata set for this resolution index!")
 	
 	SettingsData.screen_res = res_value
-	DisplayServer.window_set_size(res_value)
 
 func _on_wm_box_item_selected(index: int) -> void:
-	DisplayServer.window_set_mode($HBoxContainer/Visuals/WindowMode/WMBox.get_item_id(index))
+	SettingsData.window_mode = $HBoxContainer/Visuals/WindowMode/WMBox.get_item_id(index)
+
+# Apply settings
+func _on_apply_btn_pressed() -> void:
+	SettingsData.apply_vis_settings()
+
+func _on_back_btn_pressed() -> void:
+	back.emit()
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		back.emit()

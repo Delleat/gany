@@ -175,7 +175,6 @@ prompt_message = "Interact"
 
 [node name="Decor" type="Node3D" parent="." unique_id=205961548]
 transform = Transform3D(12.881597, 0, 0, 0, -4.3711374e-08, 9.617723, 0, -0.99999964, -4.2040404e-07, 0, 11.947318, 24.212751)
-visible = false
 
 [node name="TEXT" type="Label3D" parent="Decor" unique_id=1037629968]
 transform = Transform3D(0.07763013, 0, 0, 0, -4.3711406e-08, -1.0000004, 0, 0.103974715, -4.544879e-09, 0, 75.49925, 0.29182184)
@@ -212,4 +211,4 @@ data = SubResource("VoxelGIData_fvcc2")
 [node name="Chair" parent="." unique_id=2019198674 instance=ExtResource("9_fvcc2")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.600116, 0.3747016, 4.8136)
 
-[editable path="Items/Key"]
+[connection signal="settings_changed" from="Player" to="." method="apply_player_settings"]

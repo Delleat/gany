@@ -1,0 +1,212 @@
+[gd_scene format=3 uid="uid://b1x3y1gw6igyl"]
+
+[ext_resource type="Script" uid="uid://dpv1fh6un2hkj" path="res://scripts/settings_menu.gd" id="1_5p8wc"]
+
+[node name="Settings" type="Control" unique_id=635073764]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5p8wc")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1905981024]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.69411767)
+
+[node name="SettingsLb" type="Label" parent="." unique_id=1392298499]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.38793054
+anchor_top = 0.040123455
+anchor_right = 0.6120694
+anchor_bottom = 0.13993827
+offset_left = 0.104003906
+offset_right = -0.104003906
+offset_bottom = 0.3199997
+grow_horizontal = 2
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=2144430937]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.13823265
+anchor_top = 0.23751855
+anchor_right = 0.8617675
+anchor_bottom = 0.7624815
+offset_left = -0.24401855
+offset_top = 0.08798218
+offset_right = 0.24401855
+offset_bottom = -0.088012695
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Movement" type="VBoxContainer" parent="HBoxContainer" unique_id=1785791347]
+layout_mode = 2
+metadata/_edit_group_ = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="HBoxContainer/Movement" unique_id=412774062]
+layout_mode = 2
+text = "Movement"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/Movement" unique_id=781850801]
+layout_mode = 2
+
+[node name="SprintToggle" type="CheckBox" parent="HBoxContainer/Movement" unique_id=379452710]
+layout_mode = 2
+text = "Toggle sprint"
+
+[node name="CrouchToggle" type="CheckBox" parent="HBoxContainer/Movement" unique_id=1876106392]
+layout_mode = 2
+button_pressed = true
+text = "Toggle Crouch"
+
+[node name="CameraSmoothing" type="CheckBox" parent="HBoxContainer/Movement" unique_id=1655297263]
+layout_mode = 2
+text = "Camera Smoothing"
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer" unique_id=431530440]
+layout_mode = 2
+
+[node name="Visuals" type="VBoxContainer" parent="HBoxContainer" unique_id=1810090440]
+layout_mode = 2
+metadata/_edit_group_ = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="HBoxContainer/Visuals" unique_id=638032918]
+layout_mode = 2
+text = "Visuals"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/Visuals" unique_id=1775785171]
+layout_mode = 2
+
+[node name="Vsync" type="HBoxContainer" parent="HBoxContainer/Visuals" unique_id=131061230]
+layout_mode = 2
+theme_override_constants/separation = 78
+alignment = 1
+
+[node name="VsyncLb" type="Label" parent="HBoxContainer/Visuals/Vsync" unique_id=1574001937]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Vsync"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VsyncBox" type="OptionButton" parent="HBoxContainer/Visuals/Vsync" unique_id=1593213781]
+layout_mode = 2
+selected = 0
+allow_reselect = true
+item_count = 3
+popup/item_0/text = "Disabled"
+popup/item_0/id = 0
+popup/item_1/text = "Enabled"
+popup/item_1/id = 1
+popup/item_2/text = "Adaptive"
+popup/item_2/id = 2
+
+[node name="Res" type="HBoxContainer" parent="HBoxContainer/Visuals" unique_id=1522567309]
+layout_mode = 2
+theme_override_constants/separation = 41
+
+[node name="ResLb" type="Label" parent="HBoxContainer/Visuals/Res" unique_id=1186572992]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Resolution"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResBox" type="OptionButton" parent="HBoxContainer/Visuals/Res" unique_id=792992812]
+layout_mode = 2
+selected = 3
+allow_reselect = true
+item_count = 6
+popup/item_0/text = "373x37"
+popup/item_0/id = 4
+popup/item_1/text = "123x69"
+popup/item_1/id = 0
+popup/item_2/text = "1280x720"
+popup/item_2/id = 1
+popup/item_3/text = "1366x768"
+popup/item_3/id = 2
+popup/item_4/text = "1920x1080"
+popup/item_4/id = 3
+popup/item_5/text = "2560x1440"
+popup/item_5/id = 5
+
+[node name="WindowMode" type="HBoxContainer" parent="HBoxContainer/Visuals" unique_id=429920122]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="WMLb" type="Label" parent="HBoxContainer/Visuals/WindowMode" unique_id=682464827]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Window mode"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WMBox" type="OptionButton" parent="HBoxContainer/Visuals/WindowMode" unique_id=194908712]
+layout_mode = 2
+selected = 1
+allow_reselect = true
+item_count = 3
+popup/item_0/text = "Windowed"
+popup/item_0/id = 0
+popup/item_1/text = "Fullscreen"
+popup/item_1/id = 3
+popup/item_2/text = "Exclusive"
+popup/item_2/id = 4
+
+[node name="BackBtn" type="Button" parent="." unique_id=780704012]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.01789591
+anchor_top = 0.8986174
+anchor_right = 0.09201389
+anchor_bottom = 0.9722223
+offset_left = 0.38391113
+offset_top = -0.30407715
+grow_horizontal = 0
+grow_vertical = 0
+text = "Back"
+metadata/_edit_use_anchors_ = true
+
+[node name="ApplyBtn" type="Button" parent="." unique_id=920658480]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.90418065
+anchor_top = 0.8986174
+anchor_right = 0.9782986
+anchor_bottom = 0.9722223
+offset_left = 0.38391113
+offset_top = -0.30407715
+grow_horizontal = 0
+grow_vertical = 0
+text = "Apply"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="toggled" from="HBoxContainer/Movement/SprintToggle" to="." method="_on_sprint_toggle_toggled"]
+[connection signal="toggled" from="HBoxContainer/Movement/CrouchToggle" to="." method="_on_crouch_toggle_toggled"]
+[connection signal="toggled" from="HBoxContainer/Movement/CameraSmoothing" to="." method="_on_camera_smoothing_toggled"]
+[connection signal="item_selected" from="HBoxContainer/Visuals/Vsync/VsyncBox" to="." method="_on_res_box_item_selected"]
+[connection signal="item_selected" from="HBoxContainer/Visuals/Res/ResBox" to="." method="_on_res_box_item_selected"]
+[connection signal="item_selected" from="HBoxContainer/Visuals/WindowMode/WMBox" to="." method="_on_wm_box_item_selected"]
+[connection signal="pressed" from="BackBtn" to="." method="_on_back_btn_pressed"]
+[connection signal="pressed" from="ApplyBtn" to="." method="_on_apply_btn_pressed"]

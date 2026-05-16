@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://gvc8usnb0lbv"]
+
+[ext_resource type="Theme" uid="uid://3b6jfloh1m1l" path="res://other/ui_theme.tres" id="1_kukqi"]
+[ext_resource type="Script" uid="uid://lvsqa21h8rlt" path="res://scripts/pause_menu.gd" id="2_5d2l8"]
+[ext_resource type="PackedScene" uid="uid://b1x3y1gw6igyl" path="res://scenes/settings.tscn" id="3_7l7mv"]
+
+[node name="PauseMenu" type="Control" unique_id=162939457]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_kukqi")
+script = ExtResource("2_5d2l8")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1732372048]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.69411767)
+
+[node name="Menu" type="VBoxContainer" parent="." unique_id=1851721600]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.37102085
+anchor_top = 0.23288892
+anchor_right = 0.6289792
+anchor_bottom = 0.7671111
+offset_left = -0.41601563
+offset_top = 0.08798218
+offset_right = 0.4159546
+offset_bottom = -0.088012695
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ReturnBtn" type="Button" parent="Menu" unique_id=1739955353]
+layout_mode = 2
+text = "Return"
+
+[node name="SettingsBtn" type="Button" parent="Menu" unique_id=2129466811]
+layout_mode = 2
+text = "Settings"
+
+[node name="QuitBtn" type="Button" parent="Menu" unique_id=1343433696]
+layout_mode = 2
+text = "Quit"
+
+[node name="Settings" parent="." unique_id=635073764 instance=ExtResource("3_7l7mv")]
+layout_mode = 1
+
+[connection signal="pressed" from="Menu/ReturnBtn" to="." method="toggle"]
+[connection signal="pressed" from="Menu/SettingsBtn" to="." method="_on_settings_btn_pressed"]
+[connection signal="pressed" from="Menu/QuitBtn" to="." method="_on_quit_btn_pressed"]
+[connection signal="back" from="Settings" to="." method="_on_settings_back"]

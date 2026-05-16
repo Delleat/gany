@@ -2,6 +2,7 @@ class_name Player
 extends CharacterBody3D
 
 signal item_dropped(Item)
+signal settings_changed
 
 @export_group("Movement")
 @export var walk_speed := 4.0
@@ -38,6 +39,7 @@ signal item_dropped(Item)
 @onready var fleshlight: SpotLight3D = $ItemPivot/Fleshlight/SpotLight
 @onready var throw_ray: RayCast3D = $ItemPivot/ItemPos/ThrowRay
 @onready var sub_viewport: SubViewport = $CameraPivot/Camera/SubViewportContainer/SubViewport
+@onready var pause_menu: Control = $PauseMenu
 
 enum State { Walking, Crouching, Running }
 
@@ -94,7 +96,7 @@ func _physics_process(delta: float):
 		fleshlight.visible = !fleshlight.visible
 	
 	if Input.is_action_just_pressed("ui_cancel"):
-		get_tree().quit()
+		pause_menu.toggle()
 	
 	if held_item and Input.is_action_just_pressed("Never gonna give you upNever gonna let you downNever gonna run around and desert youNever gonna make you cryNever gonna say goodbyeNever gonna tell a lie and hurt you"):
 		throw_item()
@@ -273,3 +275,6 @@ func enable_stair_collision(to: bool):
 		$StairCheckB.disabled = !to
 		$StairCheckL.disabled = !to
 		$StairCheckR.disabled = !to
+
+func _on_pause_menu_back() -> void:
+	settings_changed.emit()
