@@ -54,4 +54,4 @@ func _item_dropped(item: Item):
 func apply_player_settings() -> void:
 	player.crouch_is_toggle = SettingsData.toggle_crouch
 	player.sprint_is_toggle = SettingsData.toggle_sprint
-	player.camera_smoothing = SettingsData.camera_smoothing
+	player.pivot.camera_smoothing = SettingsData.camera_smoothing

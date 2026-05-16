@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c6rbe48b3hp0n" path="res://addons/interact/interact_ray.tscn" id="2_qhqgy"]
 [ext_resource type="Theme" uid="uid://rxccg77x7mel" path="res://other/hud_theme.tres" id="3_dqkch"]
 [ext_resource type="ArrayMesh" uid="uid://c72tyum3o0tha" path="res://models/fleshlight/fleshlight.res" id="3_qlg0r"]
+[ext_resource type="Script" uid="uid://1kad862bp5s5" path="res://scripts/controllers/camera_controller.gd" id="4_fjrip"]
 [ext_resource type="PackedScene" uid="uid://gvc8usnb0lbv" path="res://scenes/pause_menu.tscn" id="6_tuyoq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qlg0r"]
@@ -72,6 +73,7 @@ spot_angle_attenuation = 2.0
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=964653165]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+script = ExtResource("4_fjrip")
 
 [node name="Camera" type="Camera3D" parent="CameraPivot" unique_id=258885141]
 cull_mask = 1048573
@@ -86,6 +88,7 @@ grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="SubViewport" type="SubViewport" parent="CameraPivot/Camera/SubViewportContainer" unique_id=598931813]
+unique_name_in_owner = true
 transparent_bg = true
 handle_input_locally = false
 msaa_3d = 1

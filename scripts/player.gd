@@ -11,23 +11,16 @@ signal settings_changed
 @export var jump_velocity := 4.5
 @export var max_stamina := 100.0
 
-@export_group("Camera")
-@export var mouse_sensitivity := 0.002
-@export var smoothing_amount := 15.0
-@export var bob_freq := 2.4
-@export var bob_amp := 0.05
-
 @export_group("Options")
-@export var sprint_is_toggle := false # toggle for settings which we will not probably even use btw
-@export var crouch_is_toggle := true # toggle for settings which we will not probably even use btw v2
-@export var camera_smoothing := false
+@export var sprint_is_toggle := false 
+@export var crouch_is_toggle := true 
 
 @export_group("Misc")
 @export var throw_force := 10.0
 @export var highlight_shader: ShaderMaterial
 @export var door_pull_force := 1.5
 
-@onready var pivot: Node3D = $CameraPivot
+@onready var pivot: CameraController = $CameraPivot 
 @onready var cam: Camera3D = $CameraPivot/Camera
 @onready var coll: CollisionShape3D = $Collision
 @onready var debug: Label = $HUD/Debug
@@ -38,8 +31,8 @@ signal settings_changed
 @onready var item_camera: Camera3D = $CameraPivot/Camera/SubViewportContainer/SubViewport/ItemCamera
 @onready var fleshlight: SpotLight3D = $ItemPivot/Fleshlight/SpotLight
 @onready var throw_ray: RayCast3D = $ItemPivot/ItemPos/ThrowRay
-@onready var sub_viewport: SubViewport = $CameraPivot/Camera/SubViewportContainer/SubViewport
 @onready var pause_menu: Control = $PauseMenu
+@onready var sub_viewport: SubViewport = $CameraPivot/Camera/SubViewportContainer/SubViewport
 
 enum State { Walking, Crouching, Running }
 
@@ -47,9 +40,6 @@ var player_state := State.Walking
 var current_stamina : float
 var stamina_cooled_down := true
 var current_speed := walk_speed
-var t_bob := 0.0
-var target_rotation_x := 0.0
-var target_rotation_y := 0.0
 var held_item: Item
 
 var is_crouch_toggled := false
@@ -65,30 +55,29 @@ func _ready():
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		pause_menu.toggle()
+		
+	if get_tree().paused: 
+		return
+		
+	if event.is_action_pressed("fleshlight"):
+		fleshlight.visible = !fleshlight.visible
+		
+	if held_item and event.is_action_pressed("Never gonna give you upNever gonna let you downNever gonna run around and desert youNever gonna make you cryNever gonna say goodbyeNever gonna tell a lie and hurt you"):
+		throw_item()
 
 func _unhandled_input(event):
+	if get_tree().paused: return
+	
 	if event is InputEventMouseMotion:
-		if grabbed_door:
-			mouse_input_y = event.relative.y
-			target_rotation_y -= event.relative.x * (mouse_sensitivity * 0.5)
-		else:
-			target_rotation_x = clamp(target_rotation_x - event.relative.y * mouse_sensitivity, -1.4, 1.4)
-			target_rotation_y -= event.relative.x * mouse_sensitivity
+		# Pass the mouse data to the new Camera script, and get the Y-pull back for doors
+		mouse_input_y = pivot.handle_mouse_input(event.relative, grabbed_door != null)
 
 func _physics_process(delta: float):
-	if get_tree().paused:
-		return
-	if camera_smoothing:
-		pivot.rotation.x = lerp_angle(pivot.rotation.x, target_rotation_x, delta * smoothing_amount)
-		pivot.rotation.y = lerp_angle(pivot.rotation.y, target_rotation_y, delta * smoothing_amount)
-	else:
-		pivot.rotation.x = target_rotation_x
-		pivot.rotation.y = target_rotation_y
+	if get_tree().paused: return
 	
+	# We still align the held item with the new camera script's rotation
 	item_pivot.rotation.x = lerp_angle(item_pivot.rotation.x, pivot.rotation.x, delta * 20.0)
 	item_pivot.rotation.y = lerp_angle(item_pivot.rotation.y, pivot.rotation.y, delta * 20.0)
-	
-	handle_head_bob(delta)
 	item_camera.global_transform = cam.global_transform
 	
 	debug.text = "%d FPS\nState: %s\nStamina: %d" % [Engine.get_frames_per_second(), State.keys()[player_state], current_stamina]
@@ -98,12 +87,6 @@ func _physics_process(delta: float):
 	handle_movement(delta)
 	handle_door_physics()
 	
-	if Input.is_action_just_pressed("fleshlight"):
-		fleshlight.visible = !fleshlight.visible
-	
-	if held_item and Input.is_action_just_pressed("Never gonna give you upNever gonna let you downNever gonna run around and desert youNever gonna make you cryNever gonna say goodbyeNever gonna tell a lie and hurt you"):
-		throw_item()
-		
 	move_and_slide()
 	push_rigid_bodies()
 
@@ -173,14 +156,6 @@ func handle_movement(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, delta * 20.0)
 		velocity.z = move_toward(velocity.z, 0, delta * 20.0)
-
-func handle_head_bob(delta):
-	if is_on_floor() and velocity.length() > 0.1:
-		t_bob += delta * velocity.length()
-		cam.transform.origin.y = sin(t_bob * bob_freq) * bob_amp
-		cam.transform.origin.x = cos(t_bob * bob_freq * 0.5) * bob_amp
-	else:
-		cam.transform.origin = cam.transform.origin.lerp(Vector3.ZERO, delta * 10.0)
 
 func handle_door_physics():
 	if Input.is_action_just_pressed("grab"):
@@ -254,10 +229,7 @@ func push_rigid_bodies():
 				continue
 			
 			var push_point := collision.get_position()
-			
 			var push_dir := -collision.get_normal()
-			
-			#push_dir.y = 0.0002
 			push_dir = push_dir.normalized()
 			
 			var speed = velocity.length()
@@ -266,7 +238,6 @@ func push_rigid_bodies():
 			var force = clamp(speed, min_force, max_force)
 			
 			var impulse = push_dir * force / (body.mass / 2.0)
-			
 			var impulse_point = push_point - body.global_position
 			impulse_point.y = cam.global_position.y
 			body.apply_impulse(impulse, impulse_point)
