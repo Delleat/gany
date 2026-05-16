@@ -12,7 +12,6 @@ var items_to_inspect: Dictionary[Item, float] = {}
 var hot_spots: Array[Vector3] = []
 
 func _ready() -> void:
-	print(SettingsData.vsync)
 	player.crouch_is_toggle = SettingsData.toggle_crouch
 	player.sprint_is_toggle = SettingsData.toggle_sprint
 	player.camera_smoothing = SettingsData.camera_smoothing
