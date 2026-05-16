@@ -69,13 +69,11 @@ func _unhandled_input(event):
 	if get_tree().paused: return
 	
 	if event is InputEventMouseMotion:
-		# Pass the mouse data to the new Camera script, and get the Y-pull back for doors
 		mouse_input_y = pivot.handle_mouse_input(event.relative, grabbed_door != null)
 
 func _physics_process(delta: float):
 	if get_tree().paused: return
 	
-	# We still align the held item with the new camera script's rotation
 	item_pivot.rotation.x = lerp_angle(item_pivot.rotation.x, pivot.rotation.x, delta * 20.0)
 	item_pivot.rotation.y = lerp_angle(item_pivot.rotation.y, pivot.rotation.y, delta * 20.0)
 	item_camera.global_transform = cam.global_transform
